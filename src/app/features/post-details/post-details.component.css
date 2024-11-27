@@ -1,0 +1,24 @@
+.upvote-btn:hover {
+    color: greenyellow!important;
+    border: 1px solid greenyellow;
+    border-radius: 10px;
+}
+
+.downvote-btn:hover {
+    color: red!important;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+.upvoted-tally{
+    color: greenyellow!important;
+}
+
+.downvoted-tally{
+    color: red!important;
+}
+
+.divider {
+    color: cyan;
+    height: 5px;
+}
