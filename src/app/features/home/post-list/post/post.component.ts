@@ -1,12 +1,12 @@
 import { Component, Input } from '@angular/core';
 import { PostListModel } from '../models/post-list-model';
 import { NgClass } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-post',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, RouterLink],
   templateUrl: './post.component.html',
   styleUrl: './post.component.css'
 })

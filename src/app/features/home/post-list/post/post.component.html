@@ -1,5 +1,7 @@
 <div class="d-flex flex-column px-5 py-4 border border-4 rounded-5" (click)="onClick()">
-    <h4 class="fst-italic">
+    <h4 class="fst-italic subforum-title" 
+    [routerLink]="['/subforums/details', post?.subforum?.name]"
+    (click)="$event.stopPropagation()">
         Subforum: {{ post?.subforum?.name}}
     </h4>
     <h6>

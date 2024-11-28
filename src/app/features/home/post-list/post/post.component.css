@@ -17,3 +17,7 @@
 .downvoted-tally{
     color: red!important;
 }
+
+.subforum-title:hover{
+    cursor: pointer;
+}
