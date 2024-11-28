@@ -1,0 +1,26 @@
+<div class="d-flex flex-column px-5 py-4 border border-4 rounded-5 post" (click)="onClick()">
+    <h6>
+        Posted by {{ post?.user?.username}}
+    </h6>
+    <div>
+        <h4>{{ post?.title}}</h4>
+    </div>
+    <p class="text-start text-wrap fs-6">
+        {{ post?.text }}
+    </p>
+    <div class="d-flex flex-row align-items-center align-content-center">
+        <button class="btn upvote-btn" (click)="upvoteClick($event)">
+            <i class="bi bi-arrow-up fs-4"></i>
+        </button>
+        <button class="btn downvote-btn" (click)="downvoteClick($event)">
+            <i class="bi bi-arrow-down fs-4"></i>
+        </button>
+        <span class="text-center border-danger fs-4 px-2" [ngClass]="[post?.voteTally! >= 0 ? 'upvoted-tally' : 'downvoted-tally']">
+            {{post?.voteTally}}
+        </span>
+        <span class="text-center border-danger fs-4 px-2">
+            <i class="bi bi-chat"></i>
+            {{ post?.commentCount }}
+        </span>
+    </div>
+</div>

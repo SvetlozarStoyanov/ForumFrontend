@@ -1,0 +1,10 @@
+<article class="d-flex flex-column">
+    <h3 class="text-center">
+        Recent posts
+    </h3>
+    <div class="d-flex flex-column gap-3">
+        @for (post of posts; track $index) {
+        <app-subforum-post [post]="post" />
+        }
+    </div>
+</article>

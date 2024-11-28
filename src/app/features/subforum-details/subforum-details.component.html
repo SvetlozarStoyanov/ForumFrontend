@@ -1,0 +1,9 @@
+<section>
+    <article class="d-flex flex-column">
+        <h3 class="text-start">
+            {{ subforumDetails?.name }}
+        </h3>
+    </article>
+    <app-subforum-post-list [posts]="subforumDetails!.posts" />
+
+</section>
