@@ -8,19 +8,18 @@ import { PostListComponent } from "./post-list/post-list.component";
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ PostListComponent],
+  imports: [PostListComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  isLoggedIn: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor() {
 
-  ngOnInit() {
-    // Subscribe to the authStatus$ observable to track authentication status
-    this.authService.authStatus$.subscribe(status => {
-      this.isLoggedIn = status;
-    });
   }
+
+  ngOnInit(): void {
+
+  }
+
 }
