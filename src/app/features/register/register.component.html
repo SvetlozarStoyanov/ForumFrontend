@@ -1,0 +1,28 @@
+<section class="container d-flex flex-column align-items-center">
+    <h3 class="text-center my-3">
+        Register
+    </h3>
+    <form #formRef="ngForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="username" class="form-label">Username</label>
+            <input class="form-control" for="username" name="username" type="text" [(ngModel)]="registerModel.username" />
+        </div>
+        <div class="form-group">
+            <label for="username" class="form-label">Email</label>
+            <input class="form-control" for="username" name="username" type="text" [(ngModel)]="registerModel.email" />
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <input class="form-control" for="password" name="username" type="password" [(ngModel)]="registerModel.password" />
+        </div>
+        <div class="form-group">
+            <label class="form-label" for="password">Confirm Password</label>
+            <input class="form-control" for="password" name="username" type="password" [(ngModel)]="registerModel.confirmPassword" />
+        </div>
+        <div class="justify-self-center my-2">
+            <button class="btn btn-lg btn-primary">
+                Register
+            </button>
+        </div>
+    </form>
+</section>
