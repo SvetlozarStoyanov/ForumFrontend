@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../../core/services/auth.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { PostComponent } from "./post-list/post/post.component";
 import { PostListComponent } from "./post-list/post-list.component";
 
 @Component({

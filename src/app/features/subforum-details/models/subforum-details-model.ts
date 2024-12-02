@@ -1,4 +1,5 @@
-import { PostListModel } from "../../home/post-list/models/post-list-model";
+import { PostListModel } from "../../../core/models/post-list-model";
+
 
 export interface SubforumDetailsModel {
     id: number,

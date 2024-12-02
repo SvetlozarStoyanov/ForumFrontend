@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { PostListModel } from '../../home/post-list/models/post-list-model';
-import { SubforumPostComponent } from "./subforum-post/subforum-post.component";
+import { PostListModel } from '../../../core/models/post-list-model';
+import { PostComponent } from '../../../shared/post/post.component';
 
 @Component({
   selector: 'app-subforum-post-list',
   standalone: true,
-  imports: [SubforumPostComponent],
+  imports: [PostComponent],
   templateUrl: './subforum-post-list.component.html',
   styleUrl: './subforum-post-list.component.css'
 })

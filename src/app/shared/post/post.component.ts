@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { PostListModel } from '../models/post-list-model';
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { PostListModel } from '../../core/models/post-list-model';
 
 @Component({
   selector: 'app-post',

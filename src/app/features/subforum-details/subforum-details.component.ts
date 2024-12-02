@@ -3,7 +3,6 @@ import { SubforumDetailsService } from './services/subforum-details.service';
 import { SubforumDetailsModel } from './models/subforum-details-model';
 import { ActivatedRoute } from '@angular/router';
 import { SubforumPostListComponent } from "./subforum-post-list/subforum-post-list.component";
-import { PostListModel } from '../home/post-list/models/post-list-model';
 
 @Component({
   selector: 'app-subforum-details',

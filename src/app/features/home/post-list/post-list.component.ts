@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { PostListService } from './services/post-list.service';
-import { PostListModel } from './models/post-list-model';
-import { PostComponent } from "./post/post.component";
+
+
+import { Observable } from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { PostComponent } from '../../../shared/post/post.component';
+import { PostListModel } from '../../../core/models/post-list-model';
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
-  imports: [PostComponent],
+  imports: [PostComponent, AsyncPipe, NgIf],
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.css'
 })
 export class PostListComponent implements OnInit {
-  posts: PostListModel[] = [];
+  posts$?: Observable<PostListModel[]>;
   constructor(private readonly postListService: PostListService) {
 
   }
   ngOnInit(): void {
-    this.postListService.getPosts().subscribe(res => {
-      this.posts = res;
-    })
+    this.posts$ = this.postListService.getPosts();
   }
 
 

@@ -1,5 +1,6 @@
-import { SubforumMinInfoModel } from "../../../../core/models/subforum-min-info-model";
-import { UserMinInfoModel } from "../../../../core/models/user-min-info-model";
+import { SubforumMinInfoModel } from "./subforum-min-info-model";
+import { UserMinInfoModel } from "./user-min-info-model";
+
 
 
 export interface PostListModel {

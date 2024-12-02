@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { PostListModel } from '../models/post-list-model';
 import { environment } from '../../../../../environment/environment';
+import { PostListModel } from '../../../../core/models/post-list-model';
 
 @Injectable({
   providedIn: 'root'

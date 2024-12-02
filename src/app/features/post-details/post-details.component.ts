@@ -3,16 +3,17 @@ import { PostDetailsService } from './services/post-details.service';
 import { PostDetailsModel } from './models/post-details-model';
 import { NgClass } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { PostComponent } from "../../shared/post/post.component";
 
 @Component({
   selector: 'app-post-details',
   standalone: true,
-  imports: [NgClass],
+  imports: [NgClass, PostComponent],
   templateUrl: './post-details.component.html',
   styleUrl: './post-details.component.css'
 })
 export class PostDetailsComponent implements OnInit {
-  post: PostDetailsModel | undefined;
+  postdetailsModel: PostDetailsModel | undefined;
   constructor(private readonly postDetailsService: PostDetailsService,
     private readonly activatedRoute: ActivatedRoute) {
 
@@ -21,7 +22,7 @@ export class PostDetailsComponent implements OnInit {
     const postIdString = this.activatedRoute.snapshot.paramMap.get('id')!;
     
     this.postDetailsService.getPostDetailsById(postIdString).subscribe(res => {
-      this.post = res;
+      this.postdetailsModel = res;
     });
   }
 

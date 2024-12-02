@@ -2,9 +2,11 @@
     <h3 class="text-center">
         Recent posts
     </h3>
-    <div class="d-flex flex-column gap-3">
-        @for (post of posts; track $index) {
-        <app-post [post]="post" />
-        }
-    </div>
+    <ng-container *ngIf="posts$ | async as posts">
+        <div class="d-flex flex-column gap-3">
+            @for (post of posts; track $index) {
+            <app-post [post]="post" />
+            }
+        </div>
+    </ng-container>
 </article>
