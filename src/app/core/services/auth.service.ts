@@ -46,7 +46,6 @@ export class AuthService {
   }
 
   logout() {
-    this.authStatus.next(false);
     return this.httpClient.post(`${environment.apiUrl}/users/logout`, {}).pipe(
       map (res =>{
         this.authStatus.next(false);
