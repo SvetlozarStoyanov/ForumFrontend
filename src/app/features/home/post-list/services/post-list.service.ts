@@ -13,6 +13,6 @@ export class PostListService {
   }
 
   getPosts() {
-    return this.httpClient.get<PostListModel[]>(`${environment.apiUrl}/posts/get-guest-user-posts`);
+    return this.httpClient.get<PostListModel[]>(`${environment.apiUrl}/posts/get-home-posts`);
   }
 }
