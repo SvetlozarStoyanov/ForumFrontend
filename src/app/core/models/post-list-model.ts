@@ -1,5 +1,6 @@
 import { SubforumMinInfoModel } from "./subforum-min-info-model";
 import { UserMinInfoModel } from "./user-min-info-model";
+import { UserVoteModel } from "./user-vote-model";
 
 
 
@@ -8,7 +9,8 @@ export interface PostListModel {
     title: string,
     text: string,
     voteTally: number,
+    commentCount: number,
     user: UserMinInfoModel,
     subforum: SubforumMinInfoModel,
-    commentCount: number
+    userVote: UserVoteModel
 }
