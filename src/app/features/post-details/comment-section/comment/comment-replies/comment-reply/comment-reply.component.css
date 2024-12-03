@@ -4,7 +4,26 @@
     border-radius: 10px;
 }
 
+.upvoted-btn {
+    color: greenyellow !important;
+}
+
+.upvoted-btn:hover {
+    border: 1px solid greenyellow;
+    border-radius: 10px;
+}
+
 .downvote-btn:hover {
+    color: red !important;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+.downvoted-btn {
+    color: red !important;
+}
+
+.downvoted-btn:hover {
     color: red !important;
     border: 1px solid red;
     border-radius: 10px;

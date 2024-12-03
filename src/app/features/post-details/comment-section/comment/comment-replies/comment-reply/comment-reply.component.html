@@ -1,0 +1,23 @@
+<div class="p-4 ms-3 border border-2 border-white border-opacity-10 rounded-5">
+
+    <div class="d-flex flex-column justify-content-around">
+        <h5>
+            By {{ reply?.user?.username}}
+        </h5>
+        <p class="fs-5 text-wrap text-start">
+            {{ reply?.text}}
+        </p>
+    </div>
+    <div class="d-flex flex-row align-items-center align-content-center">
+        <button class="btn upvote-btn bg-dark rounded-circle">
+            <i class="bi bi-arrow-up fs-4"></i>
+        </button>
+        <button class="btn downvote-btn bg-dark rounded-circle">
+            <i class="bi bi-arrow-down fs-4"></i>
+        </button>
+        <span class="text-center border-danger fs-4 px-2" [ngClass]="[reply?.voteTally! > 0 ? 'upvoted-tally' : 
+            reply?.voteTally! < 0 ? 'downvoted-tally' : '']">
+            {{ reply?.voteTally }}
+        </span>
+    </div>
+</div>

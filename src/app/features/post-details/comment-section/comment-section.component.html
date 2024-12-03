@@ -1,0 +1,16 @@
+@if (isLoggedIn$ | async) {
+<form #createCommentForm="ngForm" class="d-flex flex-column gap-2 my-3"
+    (ngSubmit)="createCommentSubmit(createCommentForm)">
+    <label for="text" class="form-label fs-5">Share your thoughts</label>
+    <textarea name="text" [(ngModel)]="newComment.text" class="form-control-lg flex-grow-2 bg-dark text-white"
+        placeholder="Comment..." rows="1"></textarea>
+    <button class="align-self-end flex-grow 1 btn btn-lg btn-success p-3" type="submit">Post</button>
+</form>
+}
+<article>
+    @for (comment of comments; track $index) {
+    <div class="d-flex flex-column gap-3 p-3 border border-2 border-white border-opacity-25 rounded-5">
+        <app-comment [comment]="comment" />
+    </div>
+    }
+</article>
