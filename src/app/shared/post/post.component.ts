@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import { PostListModel } from '../../core/models/post-list-model';
+import { VoteType } from '../../core/enums/vote-types';
 
 @Component({
   selector: 'app-post',
@@ -12,6 +13,7 @@ import { PostListModel } from '../../core/models/post-list-model';
 })
 export class PostComponent {
   @Input('post') post?: PostListModel;
+  voteType = VoteType;
 
   constructor(private readonly router: Router) {
 

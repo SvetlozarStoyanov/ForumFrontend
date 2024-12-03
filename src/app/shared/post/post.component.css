@@ -1,23 +1,43 @@
 .upvote-btn:hover {
-    color: greenyellow!important;
+    color: greenyellow !important;
+    border: 1px solid greenyellow;
+    border-radius: 10px;
+}
+
+.upvoted-btn {
+    color: greenyellow !important;
+}
+
+.upvoted-btn:hover {
     border: 1px solid greenyellow;
     border-radius: 10px;
 }
 
 .downvote-btn:hover {
-    color: red!important;
+    color: red !important;
     border: 1px solid red;
     border-radius: 10px;
 }
 
-.upvoted-tally{
-    color: greenyellow!important;
+.downvoted-btn {
+    color: red !important;
 }
 
-.downvoted-tally{
-    color: red!important;
+
+.downvoted-btn:hover {
+    color: red !important;
+    border: 1px solid red;
+    border-radius: 10px;
 }
 
-.subforum-title:hover{
+.upvoted-tally {
+    color: greenyellow !important;
+}
+
+.downvoted-tally {
+    color: red !important;
+}
+
+.subforum-title:hover {
     cursor: pointer;
 }

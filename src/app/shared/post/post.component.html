@@ -1,7 +1,6 @@
 <div class="d-flex flex-column gap-3 p-3 rounded-5" (click)="onClick()">
-    <h4 class="fst-italic subforum-title" 
-    [routerLink]="['/subforums/details', post?.subforum?.name]"
-    (click)="$event.stopPropagation()">
+    <h4 class="fst-italic subforum-title" [routerLink]="['/subforums/details', post?.subforum?.name]"
+        (click)="$event.stopPropagation()">
         Subforum: {{ post?.subforum?.name}}
     </h4>
     <h6>
@@ -14,10 +13,12 @@
         {{ post?.text }}
     </p>
     <div class="d-flex flex-row align-items-center align-content-center">
-        <button class="btn upvote-btn bg-dark rounded-circle">
+        <button class="btn bg-dark rounded-circle"
+            [ngClass]="[post?.userVote?.voteType === voteType.Up ? 'upvoted-btn' : 'upvote-btn']">
             <i class="bi bi-arrow-up fs-4"></i>
         </button>
-        <button class="btn downvote-btn bg-dark rounded-circle">
+        <button class="btn bg-dark rounded-circle"
+            [ngClass]="[post?.userVote?.voteType === voteType.Down ? 'downvoted-btn' : 'downvote-btn']">
             <i class="bi bi-arrow-down fs-4"></i>
         </button>
         <span class="text-center border-danger fs-4 px-2"
