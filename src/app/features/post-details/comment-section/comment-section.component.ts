@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, numberAttribute, OnInit, Output, ViewChild } from '@angular/core';
 import { CommentListModel } from '../models/comment-list-model';
 import { CommentComponent } from "./comment/comment.component";
 import { FormsModule, NgForm } from '@angular/forms';
@@ -7,6 +7,8 @@ import { EMPTY, map, Observable } from 'rxjs';
 import { CommentCreateModel } from '../models/comment-create-model';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommentService } from '../services/comment.service';
+import { VoteType } from '../../../core/enums/vote-types';
+import { UserPermittedActionsModel } from '../../../core/models/user-permitted-actions-model';
 
 @Component({
   selector: 'app-comment-section',
@@ -42,13 +44,28 @@ export class CommentSectionComponent implements OnInit {
 
   createCommentSubmit(createCommentForm: NgForm) {
     this.newComment.postId = this.postId;
-    this.commentService.createComment(this.newComment).pipe(map(res => {
-      this.commentService.getPostComments(this.postId).subscribe(
-        res => {
-          this.comments = res;
-        }
-      )
-    })).subscribe();
+    let currentUser = this.authService.getCurrentUser();
+    let addedComment: CommentListModel = {
+      id: 0,
+      text: this.newComment.text,
+      voteTally: 0,
+      user: {
+        id: currentUser!.id,
+        username: currentUser!.username
+      },
+      userPermittedActions: {
+        canEdit: true,
+        canDelete: true
+      },
+      userVote: {
+        voteType: VoteType.None
+      },
+      replies: []
+    };
+    this.commentService.createComment(this.newComment).subscribe(res => {
+      addedComment.id = res;
+      this.comments = [addedComment, ...this.comments]
+    })
     createCommentForm.reset();
 
   }

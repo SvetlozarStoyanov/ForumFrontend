@@ -17,6 +17,6 @@ export class CommentService {
   }
 
   createComment(commentCreateModel: CommentCreateModel) {
-    return this.httpClient.post(`${environment.apiUrl}/comments/create`, commentCreateModel);
+    return this.httpClient.post<number>(`${environment.apiUrl}/comments/create`, commentCreateModel);
   }
 }

@@ -1,5 +1,5 @@
 <div>
     @for (reply of replies; track $index) {
-    <app-comment-reply [reply]="reply" />
+    <app-comment-reply (deleteEvent)="onDelete($event)" [reply]="reply" />
     }
 </div>

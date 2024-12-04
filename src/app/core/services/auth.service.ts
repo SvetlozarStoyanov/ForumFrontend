@@ -5,6 +5,7 @@ import { LoginModel } from '../models/login-model';
 import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 import { UserAuthModel } from '../models/user-auth-model';
 import { RegisterModel } from '../models/register-model';
+import { UserMinInfoModel } from '../models/user-min-info-model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +16,14 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient) {
     this.syncAuthState();
+  }
+
+  getCurrentUser(): UserMinInfoModel | null {
+    let userAsString = localStorage.getItem('user');
+    if (!userAsString) {
+      return null;
+    }
+    return JSON.parse(userAsString);
   }
 
   login(loginModel: LoginModel) {
@@ -31,7 +40,7 @@ export class AuthService {
     );
   }
 
-  register(registerModel: RegisterModel){
+  register(registerModel: RegisterModel) {
     return this.httpClient.post<UserAuthModel>(`${environment.apiUrl}/users/register`, registerModel).pipe(
       map(res => {
         localStorage.setItem('user', JSON.stringify(res));
@@ -47,7 +56,7 @@ export class AuthService {
 
   logout() {
     return this.httpClient.post(`${environment.apiUrl}/users/logout`, {}).pipe(
-      map (res =>{
+      map(res => {
         this.authStatus.next(false);
         localStorage.removeItem('user');
         return res;

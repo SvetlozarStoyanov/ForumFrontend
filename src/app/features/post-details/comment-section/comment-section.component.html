@@ -9,8 +9,6 @@
 }
 <article>
     @for (comment of comments; track $index) {
-    <div class="d-flex flex-column gap-3 p-3 border border-2 border-white border-opacity-25 rounded-5">
-        <app-comment [comment]="comment" />
-    </div>
+    <app-comment [comment]="comment" />
     }
 </article>

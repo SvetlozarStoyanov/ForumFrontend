@@ -1,6 +1,25 @@
 <div class="p-4 ms-3 border border-2 border-white border-opacity-10 rounded-5">
 
     <div class="d-flex flex-column justify-content-around">
+        <div class="btn-group align-self-end justify-self-end ">
+            <button class="btn btn-lg btn-secondary bg-dark rounded-circle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                ...
+            </button>
+            <ul class="dropdown-menu">
+                @if (reply?.userPermittedActions?.canEdit) {
+
+                <li class="dropdown-item">
+                    <i class="bi bi-pen text-warning"></i> Edit
+                </li>
+                }
+                @if (reply?.userPermittedActions?.canDelete) {
+                <li class="dropdown-item" (click)="onDeleteEvent()">
+                    <i class="bi bi-trash3 text-danger"></i> Delete
+                </li>
+                }
+            </ul>
+        </div>
         <h5>
             By {{ reply?.user?.username}}
         </h5>
