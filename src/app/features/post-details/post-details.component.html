@@ -1,5 +1,7 @@
 <section
     class="d-flex flex-column px-5 py-4 bg-dark bg-opacity-25 border border-1 border-white border-opacity-10 rounded-5">
-    <app-post [post]="postdetailsModel?.post" />
+    <app-post [post]="postdetailsModel?.post" 
+    (editEvent)="onPostEdit($event)"
+    (deleteEvent)="onPostDelete($event)" />
     <app-comment-section [postId]="postdetailsModel!.post!.id" />
 </section>

@@ -2,11 +2,13 @@
     <h3 class="text-center">
         Recent posts
     </h3>
-    <ng-container *ngIf="posts$ | async as posts">
-        <div class="d-flex flex-column gap-3">
-            @for (post of posts; track $index) {
-            <app-post [post]="post" />
-            }
+
+    <div class="d-flex flex-column gap-3">
+        @for (post of posts; track $index) {
+        <div class="btn btn-secondary" (click)="redirectClick($event, post.id)">
+            <app-post [post]="post" (deleteEvent)="deletePost($event)" />
         </div>
-    </ng-container>
+        }
+    </div>
+
 </article>

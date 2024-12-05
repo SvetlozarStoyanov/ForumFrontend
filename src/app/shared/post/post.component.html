@@ -1,28 +1,70 @@
-<div class="d-flex flex-column gap-3 p-3 rounded-5" (click)="onClick()">
-    <h4 class="fst-italic subforum-title" [routerLink]="['/subforums/details', post?.subforum?.name]"
-        (click)="$event.stopPropagation()">
-        Subforum: {{ post?.subforum?.name}}
-    </h4>
-    <h6>
-        Posted by {{ post?.user?.username}}
-    </h6>
-    <div>
-        <h4>{{ post?.title}}</h4>
+<div class="d-flex flex-column gap-3 p-3">
+    <div class="d-flex flex-row justify-content-between">
+        <div class="d-flex flex-column gap-3">
+            <h5 class="fst-italic text-start" [routerLink]="['/subforums/details', post?.subforum?.name]">
+                Subforum: {{ post?.subforum?.name}}
+            </h5>
+            <h6 class="ms-1 text-start">
+                Posted by {{ post?.user?.username}}
+            </h6>
+        </div>
+        <div class="btn-group justify-self-end align-self-start">
+            <button class="btn btn-lg btn-secondary bg-dark rounded-circle" type="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                ...
+            </button>
+            <ul class="dropdown-menu">
+                @if (post?.userPermittedActions?.canEdit) {
+                <li class="dropdown-item" (click)="onEditEvent($event)">
+                    <i class="bi bi-pen text-warning"></i> Edit
+                </li>
+                }
+                @if (post?.userPermittedActions?.canDelete) {
+                <li class="dropdown-item" (click)="onDeleteEvent($event)">
+                    <i class="bi bi-trash3 text-danger"></i> Delete
+                </li>
+                }
+            </ul>
+        </div>
     </div>
-    <p class="text-start text-wrap fs-6">
+    <div class="text-start">
+        <h2>{{ post?.title}}</h2>
+    </div>
+    @if (isEditing) {
+    <form #editPostForm="ngForm" (ngSubmit)="editPostFormSubmit(editPostForm)">
+        <div class="form-group d-flex flex-column gap-1">
+            <label for="text" class="form-label">Edit text</label>
+            <textarea name="text" class="form-control-lg flex-grow-2 bg-dark text-white"
+                [(ngModel)]="postEditModel.text"></textarea>
+            <div class="btn-group align-self-end">
+                <button class="btn btn-lg btn-secondary p-3" type="button" (click)="onCancel($event)">
+                    Cancel
+                </button>
+                <button class="btn btn-lg btn-success p-3" type="submit">
+                    Post
+                </button>
+            </div>
+        </div>
+    </form>
+    } @else {
+    <p class="text-start text-wrap">
         {{ post?.text }}
     </p>
+    }
     <div class="d-flex flex-row align-items-center align-content-center">
-        <button class="btn bg-dark rounded-circle"
-            [ngClass]="[post?.userVote?.voteType === voteType.Up ? 'upvoted-btn' : 'upvote-btn']">
-            <i class="bi bi-arrow-up fs-4"></i>
+        <button class="btn bg-dark rounded-circle bi bi-arrow-up fs-4"
+            [ngClass]="[post?.userVote?.voteType === voteType.Up ? 'upvoted-btn' : 'upvote-btn']"
+            (click)="upvoteClick()">
+            <!-- <i class="bi bi-arrow-up fs-4"></i> -->
         </button>
-        <button class="btn bg-dark rounded-circle"
-            [ngClass]="[post?.userVote?.voteType === voteType.Down ? 'downvoted-btn' : 'downvote-btn']">
-            <i class="bi bi-arrow-down fs-4"></i>
+        <button class="btn bg-dark rounded-circle bi bi-arrow-down fs-4"
+            [ngClass]="[post?.userVote?.voteType === voteType.Down ? 'downvoted-btn' : 'downvote-btn']"
+            (click)="downvoteClick()">
+            <!-- <i class="bi bi-arrow-down fs-4"></i> -->
         </button>
-        <span class="text-center border-danger fs-4 px-2"
-            [ngClass]="[post?.voteTally! >= 0 ? 'upvoted-tally' : 'downvoted-tally']">
+        <span class="text-center border-danger fs-4 px-2" [ngClass]="[post?.voteTally! > 0 ? 'upvoted-tally' :
+             post?.voteTally! < 0 ? 'downvoted-tally' 
+             : '']">
             {{ post?.voteTally }}
         </span>
         <span class="text-center border-danger fs-4 px-2">

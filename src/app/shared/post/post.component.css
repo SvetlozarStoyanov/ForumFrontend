@@ -38,6 +38,13 @@
     color: red !important;
 }
 
-.subforum-title:hover {
-    cursor: pointer;
+textarea {
+    resize: none;
+    min-height: 100px;
+    line-height: 1.5;
+}
+
+.form-control::placeholder{
+    color: white!important;
+    opacity: 1;
 }
