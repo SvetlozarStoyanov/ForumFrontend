@@ -4,7 +4,9 @@
     </h3>
     <div class="d-flex flex-column gap-3">
         @for (post of posts; track $index) {
-        <app-post [post]="post" />
+        <div class="btn btn-secondary" (click)="redirectClick($event, post.id)">
+            <app-post [post]="post" (deleteEvent)="deletePost($event)" />
+        </div>
         }
     </div>
 </article>

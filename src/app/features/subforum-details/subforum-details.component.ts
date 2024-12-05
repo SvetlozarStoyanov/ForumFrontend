@@ -3,6 +3,7 @@ import { SubforumDetailsService } from './services/subforum-details.service';
 import { SubforumDetailsModel } from './models/subforum-details-model';
 import { ActivatedRoute } from '@angular/router';
 import { SubforumPostListComponent } from "./subforum-post-list/subforum-post-list.component";
+import { PostService } from '../../core/services/post.service';
 
 @Component({
   selector: 'app-subforum-details',
@@ -13,7 +14,8 @@ import { SubforumPostListComponent } from "./subforum-post-list/subforum-post-li
 })
 export class SubforumDetailsComponent implements OnInit {
   subforumDetails?: SubforumDetailsModel;
-  constructor(private readonly activatedRout: ActivatedRoute, private readonly subforumDetailsService: SubforumDetailsService) {
+  constructor(private readonly activatedRout: ActivatedRoute,
+    private readonly subforumDetailsService: SubforumDetailsService) {
 
   }
   ngOnInit(): void {
