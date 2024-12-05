@@ -1,14 +1,14 @@
-import { Component, Input, numberAttribute, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommentListModel } from '../models/comment-list-model';
 import { CommentComponent } from "./comment/comment.component";
 import { FormsModule, NgForm } from '@angular/forms';
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
-import { EMPTY, map, Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 import { CommentCreateModel } from '../models/comment-create-model';
 import { AuthService } from '../../../core/services/auth.service';
 import { CommentService } from '../services/comment.service';
 import { VoteType } from '../../../core/enums/vote-types';
-import { UserPermittedActionsModel } from '../../../core/models/user-permitted-actions-model';
+import { CommentEditModel } from '../models/comment-edit-model';
 
 @Component({
   selector: 'app-comment-section',
@@ -67,6 +67,17 @@ export class CommentSectionComponent implements OnInit {
       this.comments = [addedComment, ...this.comments]
     })
     createCommentForm.reset();
+  }
 
+  editComment(commentEditModel: CommentEditModel){
+    this.commentService.updateComment(commentEditModel).subscribe(res =>{
+
+    });
+  }
+
+  deleteComment(deletedCommentId: number) {
+    this.commentService.deleteComment(deletedCommentId).subscribe(res => {
+      this.comments = this.comments.filter(x => x.id !== deletedCommentId);
+    })
   }
 }

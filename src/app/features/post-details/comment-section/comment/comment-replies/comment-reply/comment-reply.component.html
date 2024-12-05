@@ -1,31 +1,50 @@
 <div class="p-4 ms-3 border border-2 border-white border-opacity-10 rounded-5">
 
     <div class="d-flex flex-column justify-content-around">
-        <div class="btn-group align-self-end justify-self-end ">
-            <button class="btn btn-lg btn-secondary bg-dark rounded-circle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                ...
-            </button>
-            <ul class="dropdown-menu">
-                @if (reply?.userPermittedActions?.canEdit) {
-
-                <li class="dropdown-item">
-                    <i class="bi bi-pen text-warning"></i> Edit
-                </li>
-                }
-                @if (reply?.userPermittedActions?.canDelete) {
-                <li class="dropdown-item" (click)="onDeleteEvent()">
-                    <i class="bi bi-trash3 text-danger"></i> Delete
-                </li>
-                }
-            </ul>
+        <div class="d-flex flex-row justify-content-between">
+            <h5>
+                By {{ reply?.user?.username}}
+            </h5>
+            <div class="btn-group">
+                <button class="btn btn-lg btn-secondary bg-dark rounded-circle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                    ...
+                </button>
+                <ul class="dropdown-menu">
+                    @if (reply?.userPermittedActions?.canEdit) {
+                    <li class="dropdown-item" (click)="onEditEvent()">
+                        <i class="bi bi-pen text-warning"></i> Edit
+                    </li>
+                    }
+                    @if (reply?.userPermittedActions?.canDelete) {
+                    <li class="dropdown-item" (click)="onDeleteEvent()">
+                        <i class="bi bi-trash3 text-danger"></i> Delete
+                    </li>
+                    }
+                </ul>
+            </div>
         </div>
-        <h5>
-            By {{ reply?.user?.username}}
-        </h5>
+        @if (isEditing) {
+        <form #editCommentReplyForm="ngForm" (ngSubmit)="editCommentReplyFormSubmit(editCommentReplyForm)">
+            <div class="form-group d-flex flex-column gap-1">
+                <label for="text" class="form-label">Edit text</label>
+                <textarea name="text" class="form-control-lg flex-grow-2 bg-dark text-white"
+                    [(ngModel)]="replyEditModel.text"></textarea>
+                <div class="btn-group align-self-end">
+                    <button class="btn btn-lg btn-secondary p-3" type="button" (click)="onCancel($event)">
+                        Cancel
+                    </button>
+                    <button class="btn btn-lg btn-success p-3" type="submit">
+                        Post
+                    </button>
+                </div>
+            </div>
+        </form>
+        } @else {
         <p class="fs-5 text-wrap text-start">
             {{ reply?.text}}
         </p>
+        }
     </div>
     <div class="d-flex flex-row align-items-center align-content-center">
         <button class="btn upvote-btn bg-dark rounded-circle">

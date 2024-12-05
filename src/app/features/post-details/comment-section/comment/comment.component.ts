@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { CommentListModel } from '../../models/comment-list-model';
 import { NgClass } from '@angular/common';
 import { CommentRepliesComponent } from "./comment-replies/comment-replies.component";
@@ -10,7 +10,8 @@ import { AuthService } from '../../../../core/services/auth.service';
 import { UserMinInfoModel } from '../../../../core/models/user-min-info-model';
 import { VoteType } from '../../../../core/enums/vote-types';
 import { Router } from '@angular/router';
-
+import { CommentReplyEditModel } from '../../models/comment-reply-edit-model';
+import { CommentEditModel } from '../../models/comment-edit-model';
 
 @Component({
   selector: 'app-comment',
@@ -20,8 +21,19 @@ import { Router } from '@angular/router';
   styleUrl: './comment.component.css'
 })
 export class CommentComponent {
+
   @ViewChild('createReplyDiv') toggleReplyBtn!: ElementRef;
   @Input() comment?: CommentListModel;
+  @Output() editEvent = new EventEmitter<CommentEditModel>();
+  @Output() deleteEvent = new EventEmitter<number>();
+
+  isEditing: boolean = false;
+
+  commentEditModel: CommentEditModel = {
+    id: 0,
+    text: ''
+  }
+
   newCommentReply: CommentReplyCreateModel = {
     commentId: 0,
     text: ''
@@ -30,9 +42,7 @@ export class CommentComponent {
   constructor(private readonly authService: AuthService,
     private readonly commentReplyService: CommentReplyService,
     private router: Router) {
-
   }
-
 
   replyBtnClick() {
     let user: UserMinInfoModel | null = this.authService.getCurrentUser();
@@ -44,7 +54,6 @@ export class CommentComponent {
   }
 
   createCommentSubmit(createCommentReplyForm: NgForm) {
-
     let user: UserMinInfoModel | null = this.authService.getCurrentUser();
     let addedCommentReply: CommentReplyListModel = {
       id: 0,
@@ -72,4 +81,28 @@ export class CommentComponent {
     this.commentReplyService.deleteCommentReply(replyId).subscribe();
   }
 
+  editReply(commentReplyEditModel: CommentReplyEditModel) {
+    this.commentReplyService.updateCommentReply(commentReplyEditModel).subscribe();
+  }
+
+  editCommentFormSubmit(editCommentForm: NgForm) {
+    this.commentEditModel.id = this.comment?.id!;
+    this.editEvent.emit(this.commentEditModel);
+    this.comment!.text! = this.commentEditModel.text;
+    editCommentForm.reset();
+    this.isEditing = false;
+  }
+
+  onCancel($event: MouseEvent) {
+    this.isEditing = false;
+  }
+
+  onDeleteEvent() {
+    this.deleteEvent.emit(this.comment?.id);
+  }
+
+  onEditEvent() {
+    this.commentEditModel.text = this.comment?.text!;
+    this.isEditing = true;
+  }
 }
