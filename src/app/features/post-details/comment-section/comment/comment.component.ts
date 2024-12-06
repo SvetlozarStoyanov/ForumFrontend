@@ -12,6 +12,7 @@ import { VoteType } from '../../../../core/enums/vote-types';
 import { Router } from '@angular/router';
 import { CommentReplyEditModel } from '../../models/comment-reply-edit-model';
 import { CommentEditModel } from '../../models/comment-edit-model';
+import { CommentVoteService } from '../../services/comment-vote.service';
 
 @Component({
   selector: 'app-comment',
@@ -22,13 +23,14 @@ import { CommentEditModel } from '../../models/comment-edit-model';
 })
 export class CommentComponent {
 
+
   @ViewChild('createReplyDiv') toggleReplyBtn!: ElementRef;
   @Input() comment?: CommentListModel;
   @Output() editEvent = new EventEmitter<CommentEditModel>();
   @Output() deleteEvent = new EventEmitter<number>();
 
   isEditing: boolean = false;
-
+  voteType = VoteType;
   commentEditModel: CommentEditModel = {
     id: 0,
     text: ''
@@ -41,6 +43,7 @@ export class CommentComponent {
 
   constructor(private readonly authService: AuthService,
     private readonly commentReplyService: CommentReplyService,
+    private readonly commentVoteService: CommentVoteService,
     private router: Router) {
   }
 
@@ -95,6 +98,38 @@ export class CommentComponent {
 
   onCancel($event: MouseEvent) {
     this.isEditing = false;
+  }
+
+  upvoteClick() {
+    this.commentVoteService.upvoteComment(this.comment?.id!).subscribe(res => {
+      let voteType = this.comment!.userVote.voteType;
+      if (voteType === VoteType.None) {
+        this.comment!.userVote.voteType = VoteType.Up;
+        this.comment!.voteTally! += 1;
+      } else if (voteType === VoteType.Up) {
+        this.comment!.userVote.voteType = VoteType.None;
+        this.comment!.voteTally! -= 1;
+      } else {
+        this.comment!.userVote.voteType = VoteType.Up;
+        this.comment!.voteTally! += 2;
+      }
+    })
+  }
+
+  downvoteClick() {
+    this.commentVoteService.downvoteComment(this.comment?.id!).subscribe(res => {
+      let voteType = this.comment?.userVote.voteType;
+      if (voteType === VoteType.None) {
+        this.comment!.userVote.voteType = VoteType.Down;
+        this.comment!.voteTally! -= 1;
+      } else if (voteType === VoteType.Down) {
+        this.comment!.userVote.voteType = VoteType.None;
+        this.comment!.voteTally! += 1;
+      } else {
+        this.comment!.userVote.voteType = VoteType.Down;
+        this.comment!.voteTally! -= 2;
+      }
+    });
   }
 
   onDeleteEvent() {

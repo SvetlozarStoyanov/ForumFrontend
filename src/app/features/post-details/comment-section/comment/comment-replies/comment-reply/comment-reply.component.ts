@@ -4,6 +4,8 @@ import { NgClass } from '@angular/common';
 import { EventEmitter } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { CommentReplyEditModel } from '../../../../models/comment-reply-edit-model';
+import { VoteType } from '../../../../../../core/enums/vote-types';
+import { CommentReplyVoteService } from '../../../../services/comment-reply-vote.service';
 
 @Component({
   selector: 'app-comment-reply',
@@ -18,10 +20,15 @@ export class CommentReplyComponent {
   @Output() deleteEvent = new EventEmitter<number>();
   @Output() editEvent = new EventEmitter<CommentReplyEditModel>();
   isEditing: boolean = false;
+  voteType = VoteType;
   replyEditModel: CommentReplyEditModel = {
     id: 0,
     text: ''
   }
+
+constructor(private readonly commentReplyVoteService: CommentReplyVoteService){
+
+}
 
   onDeleteEvent() {
     this.deleteEvent.emit(this.reply?.id);
@@ -38,6 +45,38 @@ export class CommentReplyComponent {
   onEditEvent() {
     this.replyEditModel.text = this.reply?.text!;
     this.isEditing = true;
+  }
+
+  upvoteClick() {
+    this.commentReplyVoteService.upvoteCommentReply(this.reply?.id!).subscribe(res => {
+      let voteType = this.reply!.userVote.voteType;
+      if (voteType === VoteType.None) {
+        this.reply!.userVote.voteType = VoteType.Up;
+        this.reply!.voteTally! += 1;
+      } else if (voteType === VoteType.Up) {
+        this.reply!.userVote.voteType = VoteType.None;
+        this.reply!.voteTally! -= 1;
+      } else {
+        this.reply!.userVote.voteType = VoteType.Up;
+        this.reply!.voteTally! += 2;
+      }
+    })
+  }
+
+  downvoteClick() {
+    this.commentReplyVoteService.downvoteCommentReply(this.reply?.id!).subscribe(res => {
+      let voteType = this.reply?.userVote.voteType;
+      if (voteType === VoteType.None) {
+        this.reply!.userVote.voteType = VoteType.Down;
+        this.reply!.voteTally! -= 1;
+      } else if (voteType === VoteType.Down) {
+        this.reply!.userVote.voteType = VoteType.None;
+        this.reply!.voteTally! += 1;
+      } else {
+        this.reply!.userVote.voteType = VoteType.Down;
+        this.reply!.voteTally! -= 2;
+      }
+    });
   }
 
   onCancel($event: MouseEvent) {
