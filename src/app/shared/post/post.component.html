@@ -1,9 +1,11 @@
 <div class="d-flex flex-column gap-3 p-3">
     <div class="d-flex flex-row justify-content-between">
         <div class="d-flex flex-column gap-3">
-            <h5 class="fst-italic text-start" [routerLink]="['/subforums/details', post?.subforum?.name]">
-                Subforum: {{ post?.subforum?.name}}
-            </h5>
+            <a [routerLink]="['/subforums/details', post?.subforum?.name]">
+                <h5 class="fst-italic text-start">
+                    Subforum: {{ post?.subforum?.name}}
+                </h5>
+            </a>
             <h6 class="ms-1 text-start">
                 Posted by {{ post?.user?.username}}
             </h6>
@@ -62,8 +64,8 @@
             (click)="downvoteClick()">
             <!-- <i class="bi bi-arrow-down fs-4"></i> -->
         </button>
-        <span class="text-center border-danger fs-4 px-2" [ngClass]="[post?.voteTally! > 0 ? 'upvoted-tally' :
-             post?.voteTally! < 0 ? 'downvoted-tally' 
+        <span class="text-center fs-4 px-2" [ngClass]="[post?.voteTally! > 0 ? 'upvoted-tally' 
+             : post?.voteTally! < 0 ? 'downvoted-tally' 
              : '']">
             {{ post?.voteTally }}
         </span>
