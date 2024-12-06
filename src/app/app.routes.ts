@@ -6,6 +6,8 @@ import { SubforumDetailsComponent } from './features/subforum-details/subforum-d
 import { NotFoundComponent } from './features/not-found/not-found.component';
 import { RegisterComponent } from './features/user-management/register/register.component';
 import { LoginComponent } from './features/user-management/login/login.component';
+import { CreatePostComponent } from './features/create-post/create-post.component';
+import { CreateSubforumComponent } from './features/create-subforum/create-subforum.component';
 
 
 
@@ -15,6 +17,8 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'posts/details/:id', component: PostDetailsComponent },
+    { path: 'posts/create', component: CreatePostComponent },
     { path: 'subforums/details/:name', component: SubforumDetailsComponent },
+    { path: 'subforums/create', component: CreateSubforumComponent },
     { path: '**', component: NotFoundComponent },
 ];

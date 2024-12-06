@@ -1,0 +1,33 @@
+<section class="d-flex flex-column">
+    <h2 class="text-center">
+        Create Post
+    </h2>
+    <form #createPostForm="ngForm" (ngSubmit)="onSubmit(createPostForm)" class="d-flex flex-column gap-3">
+        <div class="from-group">
+            <label for="subforumId" class="fs-5">Subforum</label>
+            <select class="form-select bg-dark text-white" name="subforumId" [(ngModel)]="selectedSubforum">
+                @for (subforum of subforumsForDropdown; track $index) {
+                <option [value]="subforum"> {{subforum.id}} - {{subforum.name}}</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="title" class="form-label fs-5">Title</label>
+            <input name="title" class="form-control bg-dark text-white" required placeholder="Write title here..."
+                [(ngModel)]="postCreateModel.title" />
+        </div>
+        <div class="form-group">
+            <label for="text" class="form-label fs-5">Text</label>
+            <textarea name="text" class="form-control bg-dark text-white" required placeholder="Write text here..."
+                [(ngModel)]="postCreateModel.text"></textarea>
+        </div>
+        <div class="d-flex flex-row gap-3 align-self-end">
+            <button class="btn btn-lg btn-secondary" type="button">
+                Cancel
+            </button>
+            <button class="btn btn-lg btn-success" type="submit">
+                Create
+            </button>
+        </div>
+    </form>
+</section>
