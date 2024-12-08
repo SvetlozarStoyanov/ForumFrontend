@@ -8,17 +8,19 @@ import { RegisterComponent } from './features/user-management/register/register.
 import { LoginComponent } from './features/user-management/login/login.component';
 import { CreatePostComponent } from './features/create-post/create-post.component';
 import { CreateSubforumComponent } from './features/create-subforum/create-subforum.component';
+import { guestGuard } from './core/guards/guest.guard';
+import { authGuard } from './core/guards/auth.guard';
 
 
 
 export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: '', redirectTo: 'home', pathMatch: 'full' },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
+    { path: 'login', component: LoginComponent, canActivate: [guestGuard] },
+    { path: 'register', component: RegisterComponent, canActivate: [guestGuard] },
     { path: 'posts/details/:id', component: PostDetailsComponent },
-    { path: 'posts/create', component: CreatePostComponent },
+    { path: 'posts/create', component: CreatePostComponent, canActivate: [authGuard] },
     { path: 'subforums/details/:name', component: SubforumDetailsComponent },
-    { path: 'subforums/create', component: CreateSubforumComponent },
+    { path: 'subforums/create', component: CreateSubforumComponent, canActivate: [authGuard] },
     { path: '**', component: NotFoundComponent },
 ];
