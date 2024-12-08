@@ -19,7 +19,6 @@ export class NameNotTakenDirective implements Validator {
       return null;
     }
     const nameTaken = this.names.includes(control.value);
-    console.log(nameTaken);
 
     return nameTaken ? { forbidden: true } : null;
   }

@@ -1,28 +1,71 @@
-<section class="container d-flex flex-column align-items-center">
-    <h3 class="text-center my-3">
-        Register
-    </h3>
-    <form #formRef="ngForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="username" class="form-label">Username</label>
-            <input class="form-control" for="username" name="username" type="text" [(ngModel)]="registerModel.username" />
-        </div>
-        <div class="form-group">
-            <label for="username" class="form-label">Email</label>
-            <input class="form-control" for="username" name="username" type="text" [(ngModel)]="registerModel.email" />
-        </div>
-        <div class="form-group">
-            <label class="form-label" for="password">Password</label>
-            <input class="form-control" for="password" name="username" type="password" [(ngModel)]="registerModel.password" />
-        </div>
-        <div class="form-group">
-            <label class="form-label" for="password">Confirm Password</label>
-            <input class="form-control" for="password" name="username" type="password" [(ngModel)]="registerModel.confirmPassword" />
-        </div>
-        <div class="justify-self-center my-2">
-            <button class="btn btn-lg btn-primary">
-                Register
-            </button>
-        </div>
-    </form>
+<section class="d-flex flex-column justity-content-center">
+    <article
+        class="d-flex flex-column align-self-center justity-content-between py-4 px-5 border border-1 border-white rounded-4">
+
+        <h3 class="text-center my-3">
+            Register
+        </h3>
+        <form #registerForm="ngForm" (ngSubmit)="onSubmit()" class="d-flex flex-column gap-3 justity-content-center">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input class="form-control" for="username" name="username" type="text"
+                    [(ngModel)]="registerModel.username" #username="ngModel" [appNameNotTaken]="allUsernames"
+                    required />
+                @if ( username.touched && username.errors?.['forbidden']) {
+                <span class="text-danger">
+                    Username is already taken!
+                </span>
+                }
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email</label>
+                <input class="form-control" for="email" name="email" type="text" [(ngModel)]="registerModel.email"
+                    #email="ngModel" required email />
+                @if (email.errors?.['email']) {
+                <span class="text-danger">
+                    Please enter a valid email address!
+                </span>
+                }
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control"
+                    [ngClass]="[password.touched && (password.errors?.['minlength'] || confirmPassword.errors?.['passwordMissmatch']) ? 'border border-4 border-danger' : '']"
+                    for="password" name="password" type="password" [(ngModel)]="registerModel.password"
+                    #password="ngModel" required minlength="5" />
+                @if (password.touched && password.errors?.['minlength']) {
+                <span class="text-danger">
+                    Must be 5 characters long!
+                </span>
+                }
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="confirmPassword">Confirm Password</label>
+                <input class="form-control"
+                    [ngClass]="[confirmPassword.touched && password.touched && confirmPassword.errors?.['passwordMissmatch'] ? 'border border-4 border-danger' : '']"
+                    for="confirmPassword" name="confirmPassword" type="password"
+                    [(ngModel)]="registerModel.confirmPassword" #confirmPassword="ngModel"
+                    appPasswordMatch="password" required />
+                @if (confirmPassword.touched && confirmPassword.errors?.['passwordMissmatch']) {
+                <span class="text-danger">
+                    Passwords must match!
+                </span>
+                }
+            </div>
+            <div class="d-flex flex-column gap-3 align-self-center my-2">
+                <button class="btn btn-lg btn-primary" [disabled]="registerForm.invalid" type="submit">
+                    Register
+                </button>
+                <div class="d-flex flex-column align-self-center">
+                    <h5 class="text-center">
+                        Already have an account?
+                    </h5>
+                    <button class="btn btn-lg btn-success" type="button" routerLink="/login">
+                        Login
+                    </button>
+                </div>
+            </div>
+        </form>
+    </article>
+
 </section>
