@@ -1,9 +1,25 @@
-<section>
-    <article class="d-flex flex-column">
-        <h3 class="text-start">
-            {{ subforumDetails?.name }}
-        </h3>
+<section class="d-flex flex-column">
+    <article class="d-flex flex-column gap-5">
+        <div class="d-flex flex-row justify-content-between">
+            <h1 class="text-start">
+                {{ subforumDetails?.name }}
+            </h1>
+            @if (subforumDetails?.userIsMember) {
+            <div class="d-flex flex-row gap-3">
+                <button class="btn btn-lg btn-info rounded-5" (click)="createPostRedirect($event)">
+                    Create Post
+                </button>
+                <button class="btn btn-lg btn-warning rounded-5" (click)="leaveSubforum($event)">
+                    Leave
+                </button>
+            </div>
+            } @else {
+            <button class="btn btn-lg btn-success" (click)="joinSubforum($event)">
+                Join
+            </button>
+            }
+        </div>
+        <app-subforum-post-list [subforum]="subforumDetails" />
     </article>
-    <app-subforum-post-list [posts]="subforumDetails!.posts" />
 
 </section>

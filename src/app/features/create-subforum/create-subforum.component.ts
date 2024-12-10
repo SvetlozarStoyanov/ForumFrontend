@@ -4,11 +4,12 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { SubforumService } from '../../core/services/subforum.service';
 import { NameNotTakenDirective } from '../../core/directives/name-not-taken.directive';
 import { Router } from '@angular/router';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-create-subforum',
   standalone: true,
-  imports: [FormsModule, NameNotTakenDirective],
+  imports: [FormsModule, NameNotTakenDirective, NgClass],
   templateUrl: './create-subforum.component.html',
   styleUrl: './create-subforum.component.css'
 })
@@ -33,7 +34,7 @@ export class CreateSubforumComponent implements OnInit {
 
     this.subforumService.createSubforum(this.subforumCreateModel).subscribe(res => {
       console.log(res);
-      this.router.navigate(['/subforums/details', res.name]);
+      this.router.navigate(['/subforums/', res.name]);
     });
   }
 }

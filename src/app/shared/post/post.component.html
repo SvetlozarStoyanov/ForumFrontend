@@ -1,7 +1,7 @@
 <div class="d-flex flex-column gap-3 p-3">
     <div class="d-flex flex-row justify-content-between">
         <div class="d-flex flex-column gap-3">
-            <a [routerLink]="['/subforums/details', post?.subforum?.name]">
+            <a [routerLink]="['/subforums/', post?.subforum?.name]" (click)="$event.stopPropagation()">
                 <h5 class="fst-italic text-start">
                     Subforum: {{ post?.subforum?.name}}
                 </h5>
@@ -11,9 +11,9 @@
             </h6>
         </div>
         <div class="btn-group justify-self-end align-self-start">
-            <button class="btn btn-lg btn-secondary bg-dark rounded-circle" type="button" data-bs-toggle="dropdown"
+            <button class="btn btn-lg rounded-circle  bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                ...
+                
             </button>
             <ul class="dropdown-menu">
                 @if (post?.userPermittedActions?.canEdit) {

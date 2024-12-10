@@ -1,10 +1,47 @@
-textarea {
-    resize: none;
-    min-height: 100px;
-    line-height: 1.5;
+.heading {
+    color: gainsboro;
 }
 
-.form-control::placeholder {
-    color: gray !important;
-    opacity: 1;
+.title-input{
+    border: 1px solid gray;
+    text-indent: 1rem;
+}
+
+.title-input:hover {
+    border: 1px solid white;
+}
+
+.title-input.invalid {
+    border: 1px solid red;
+}
+
+.title-input.invalid:hover {
+    border: 1px solid orangered;
+}
+
+.title-input::placeholder {
+    color: gainsboro;
+}
+
+textarea {
+    resize: none;
+    border: 1px solid gray;
+    text-indent: 1rem;
+    min-height: 100px;
+}
+
+textarea:hover {
+    border: 1px solid white;
+}
+
+textarea.invalid {
+    border: 1px solid red;
+}
+
+textarea.invalid:hover {
+    border: 1px solid orangered;
+}
+
+textarea::placeholder {
+    color: gainsboro;
 }

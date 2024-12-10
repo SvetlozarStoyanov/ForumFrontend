@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SubforumDetailsService } from './services/subforum-details.service';
-import { SubforumDetailsModel } from './models/subforum-details-model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SubforumPostListComponent } from "./subforum-post-list/subforum-post-list.component";
-import { PostService } from '../../core/services/post.service';
+import { SubforumDetailsModel } from '../../core/models/subforum-details-model';
+import { SubforumService } from '../../core/services/subforum.service';
 
 @Component({
   selector: 'app-subforum-details',
@@ -14,15 +13,28 @@ import { PostService } from '../../core/services/post.service';
 })
 export class SubforumDetailsComponent implements OnInit {
   subforumDetails?: SubforumDetailsModel;
-  constructor(private readonly activatedRout: ActivatedRoute,
-    private readonly subforumDetailsService: SubforumDetailsService) {
+  constructor(private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router,
+    private readonly subforumService: SubforumService) {
 
   }
   ngOnInit(): void {
-    const name = this.activatedRout.snapshot.paramMap.get('name')!;
-    console.log(name);
-    this.subforumDetailsService.getSubforumByName(name).subscribe(res => {
-      this.subforumDetails = res;
-    });
+    this.subforumDetails = this.activatedRoute.snapshot.data['subforumDetailsModel'];
+  }
+
+  joinSubforum($event: MouseEvent) {
+    this.subforumService.joinSubforum(this.subforumDetails?.id!).subscribe(res => {
+      this.subforumDetails!.userIsMember = true;
+    })
+  }
+
+  createPostRedirect($event: MouseEvent) {
+    this.router.navigate(['/posts/create'], { state: { subforumId: this.subforumDetails!.id } });
+  }
+
+  leaveSubforum($event: MouseEvent) {
+    this.subforumService.leaveSubforum(this.subforumDetails?.id!).subscribe(res => {
+      this.subforumDetails!.userIsMember = false;
+    })
   }
 }

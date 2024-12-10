@@ -1,0 +1,24 @@
+.heading {
+    color: gainsboro;
+}
+
+.name-input{
+    border: 1px solid gray;
+    text-indent: 1rem;
+}
+
+.name-input:hover {
+    border: 1px solid white;
+}
+
+.name-input.invalid {
+    border: 1px solid red;
+}
+
+.name-input.invalid:hover {
+    border: 1px solid orangered;
+}
+
+.name-input::placeholder {
+    color: gainsboro;
+}

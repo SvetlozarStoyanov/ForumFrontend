@@ -1,12 +1,27 @@
-<article class="d-flex flex-column">
-    <h3 class="text-center">
-        Recent posts
-    </h3>
+<article class="d-flex flex-column  gap-3">
+    <div class="d-flex flex-row justify-content-between">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{sortOption}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><button class="dropdown-item" (click)="onSortChange(0)">Newest</button></li>
+                <li><button class="dropdown-item" (click)="onSortChange(1)">Top Rated</button></li>
+                <li><button class="dropdown-item" (click)="onSortChange(2)">Oldest</button></li>
+            </ul>
+        </div>
+    </div>
     <div class="d-flex flex-column gap-3">
         @for (post of posts; track $index) {
-        <div class="btn btn-secondary" (click)="redirectClick($event, post.id)">
+            <div class="post-wrapper px-2 py-1 rounded-5" #post (click)="redirectClick($event, post.id)">
             <app-post [post]="post" (deleteEvent)="deletePost($event)" />
         </div>
         }
     </div>
+    @if (isLoading) {
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <div class="loader fs-4"></div>
+        </div>
+        }
 </article>

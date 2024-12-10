@@ -17,7 +17,7 @@ export class CreatePostComponent implements OnInit {
 
   subforumsForDropdown: SubforumDropdownModel[] = [];
   selectedSubforum?: SubforumDropdownModel;
-
+  routerSelectedSubforumId?: number;
   postCreateModel: PostCreateModel = {
     title: '',
     text: '',
@@ -27,13 +27,18 @@ export class CreatePostComponent implements OnInit {
   constructor(private readonly subforumDropdownService: SubforumDropdownService,
     private readonly postService: PostService,
     private readonly router: Router) {
-
+    this.setRouterSelectedSubforum();
   }
+
 
   ngOnInit(): void {
     this.subforumDropdownService.getSubforumsForDropdown().subscribe(res => {
       this.subforumsForDropdown = res;
-      this.selectedSubforum = this.subforumsForDropdown[0];
+      if (this.routerSelectedSubforumId) {
+        this.selectedSubforum = this.subforumsForDropdown.find(x => x.id == this.routerSelectedSubforumId)!;
+      } else {
+        this.selectedSubforum = this.subforumsForDropdown[0];
+      }
     })
   }
 
@@ -43,6 +48,14 @@ export class CreatePostComponent implements OnInit {
 
       this.router.navigate(['/posts/details', res]);
     });
+  }
+
+  private setRouterSelectedSubforum() {
+    const navigation = this.router.getCurrentNavigation();
+    const state = (navigation?.extras?.state as { subforumId: number; });
+    if (state) {
+      this.routerSelectedSubforumId = state.subforumId;
+    }
   }
 
 }

@@ -1,24 +1,23 @@
-<section class="d-flex flex-column">
+<section class="d-flex flex-column rounded-5">
     <h2 class="text-center">
         Create Post
     </h2>
-    <form #createPostForm="ngForm" (ngSubmit)="onSubmit(createPostForm)" class="d-flex flex-column gap-3">
+    <form #createPostForm="ngForm" (ngSubmit)="onSubmit(createPostForm)" class="d-flex flex-column gap-5">
         <div class="from-group">
             <label for="subforumId" class="fs-5">Subforum</label>
-            <select class="form-select bg-dark text-white" name="subforumId" [(ngModel)]="selectedSubforum">
+            <select class="form-select bg-dark text-white" name="subforumId" 
+            [(ngModel)]="selectedSubforum">
                 @for (subforum of subforumsForDropdown; track $index) {
-                <option [value]="subforum"> {{subforum.id}} - {{subforum.name}}</option>
+                <option [ngValue]="subforum"> {{subforum.name}}</option>
                 }
             </select>
         </div>
-        <div class="form-group">
-            <label for="title" class="form-label fs-5">Title</label>
-            <input name="title" class="form-control bg-dark text-white" required placeholder="Write title here..."
+        <div class="form-group d-flex flex-column gap-2">
+            <input name="title" class="title-input p-2 fs-5 bg-dark text-white rounded-5" required placeholder="Title"
                 [(ngModel)]="postCreateModel.title" />
         </div>
-        <div class="form-group">
-            <label for="text" class="form-label fs-5">Text</label>
-            <textarea name="text" class="form-control bg-dark text-white" required placeholder="Write text here..."
+        <div class="form-group d-flex flex-column gap-2">
+            <textarea name="text" class="p-2 bg-dark text-white rounded-5" required placeholder="Text"
                 [(ngModel)]="postCreateModel.text"></textarea>
         </div>
         <div class="d-flex flex-row gap-3 align-self-end">

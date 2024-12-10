@@ -1,13 +1,14 @@
-<section class="d-flex flex-column">
-    <h2 class="text-center">
-        Create Post
+<section class="d-flex flex-column p-3 gap-3 rounded-5">
+    <h2 class="text-start heading">
+        Create Subforum
     </h2>
     <form #createSubforumForm="ngForm" (ngSubmit)="onSubmit(createSubforumForm)" class="d-flex flex-column gap-3">
-        <div class="form-group">
-            <label for="name" class="form-label fs-5">Title</label>
-            <input name="name" class="form-control bg-dark text-white" required placeholder="Write name here..."
-                [(ngModel)]="subforumCreateModel.name" #name="ngModel" [appNameNotTaken]="subforumNames" />
-            @if (name.errors?.['forbidden'] && name.touched ) {
+        <div class="form-group d-flex flex-column gap-2">
+            <!-- <label for="name" class="form-label fs-5">Title</label> -->
+            <input name="name" class="name-input p-2 fs-3 bg-dark text-white rounded-5" autocomplete="off" required
+            placeholder="Name" [ngClass]="[name.errors?.['forbidden'] ? 'invalid':'']"
+            [(ngModel)]="subforumCreateModel.name" #name="ngModel" [appNameNotTaken]="subforumNames" />
+            @if (name.touched && name.errors?.['forbidden']) {
             <span class="text-danger fs-5">
                 Name: {{ name.value }} is already taken!
             </span>

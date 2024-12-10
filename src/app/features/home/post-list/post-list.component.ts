@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { PostListService } from './services/post-list.service';
+import { AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { PostComponent } from '../../../shared/post/post.component';
 import { PostListModel } from '../../../core/models/post-list-model';
 import { PostService } from '../../../core/services/post.service';
 import { Router } from '@angular/router';
+import { PostsQueryModel } from '../../../core/models/posts-query-model';
+import { PostOrder } from '../../../core/enums/post-order';
 
 @Component({
   selector: 'app-post-list',
@@ -12,18 +13,30 @@ import { Router } from '@angular/router';
   templateUrl: './post-list.component.html',
   styleUrl: './post-list.component.css'
 })
-export class PostListComponent implements OnInit {
+export class PostListComponent implements OnInit, AfterViewInit {
 
-  posts: PostListModel[] = [];
-  constructor(private readonly postListService: PostListService,
-    private readonly postService: PostService,
-    private router: Router) {
-
+  isLoading: boolean = false;
+  private postLimitReached: boolean = false;
+  postQueryModel: PostsQueryModel = {
+    page: 1,
+    order: PostOrder.Newest
   }
+ 
+  sortOption: string = PostOrder[0];
+  posts: PostListModel[] = [];
+  @ViewChildren('post') postElements!: QueryList<ElementRef>;
+  private observer!: IntersectionObserver;
+
+  constructor(private readonly postService: PostService,
+    private router: Router) {
+  }
+
   ngOnInit(): void {
-    this.postListService.getPosts().subscribe(res => {
-      this.posts = res;
-    });
+    this.loadPosts();
+  }
+
+  ngAfterViewInit() {
+    this.setupObserver();
   }
 
   deletePost(deletedPostId: number) {
@@ -35,9 +48,46 @@ export class PostListComponent implements OnInit {
   redirectClick($event: MouseEvent, postId: number) {
     let clickTarget = $event.target as HTMLElement;
     let targetTagName = clickTarget.tagName;
-    console.log(targetTagName);
     if (targetTagName !== "BUTTON") {
       this.router.navigate(['/posts/details', postId]);
     }
+  }
+
+  onSortChange(value: number) {
+    if (this.postQueryModel.order !== value) {
+      this.posts = [];
+      this.postQueryModel.order = value;
+      this.postQueryModel.page = 1;
+      this.loadPosts();
+      this.sortOption = PostOrder[value];
+    }
+  }
+
+  private loadPosts() {
+    this.isLoading = true;
+    this.postService.getPosts(this.postQueryModel).subscribe(res => {
+      if (res.length > 0) {
+        this.posts.push(...res);
+      } else {
+        this.postLimitReached = true;
+      }
+      this.isLoading = false;
+    });
+  }
+
+  private setupObserver(): void {
+    this.observer = new IntersectionObserver((entries) => {
+      const lastEntry = entries.find((entry) => entry.isIntersecting);
+      if (lastEntry && !this.isLoading && !this.postLimitReached) {
+        this.postQueryModel.page++;
+        this.loadPosts();
+      }
+    });
+
+    this.postElements.changes.subscribe(() => {
+      if (this.postElements.last) {
+        this.observer.observe(this.postElements.last.nativeElement);
+      }
+    });
   }
 }
