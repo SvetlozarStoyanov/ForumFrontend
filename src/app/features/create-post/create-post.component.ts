@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { PostCreateModel } from './models/post-create-model';
-import { SubforumDropdownModel } from './models/subforum-dropdown-model';
-import { SubforumDropdownService } from './services/subforum-dropdown.service';
+import { PostCreateModel } from '../../core/models/posts/post-create-model';
+import { SubforumDropdownModel } from '../../core/models/subforums/subforum-dropdown-model';
 import { PostService } from '../../core/services/post.service';
 import { Router } from '@angular/router';
+import { SubforumService } from '../../core/services/subforum.service';
 
 @Component({
   selector: 'app-create-post',
@@ -24,7 +24,7 @@ export class CreatePostComponent implements OnInit {
     subforumId: 0,
   }
 
-  constructor(private readonly subforumDropdownService: SubforumDropdownService,
+  constructor(private readonly subforumService: SubforumService,
     private readonly postService: PostService,
     private readonly router: Router) {
     this.setRouterSelectedSubforum();
@@ -32,7 +32,7 @@ export class CreatePostComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.subforumDropdownService.getSubforumsForDropdown().subscribe(res => {
+    this.subforumService.getSubforumsForDropdown().subscribe(res => {
       this.subforumsForDropdown = res;
       if (this.routerSelectedSubforumId) {
         this.selectedSubforum = this.subforumsForDropdown.find(x => x.id == this.routerSelectedSubforumId)!;
