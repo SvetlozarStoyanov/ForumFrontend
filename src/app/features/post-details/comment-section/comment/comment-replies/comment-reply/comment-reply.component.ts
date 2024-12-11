@@ -1,11 +1,11 @@
 import { Component, Input, Output } from '@angular/core';
-import { CommentReplyListModel } from '../../../../models/comment-reply-list-model';
+import { CommentReplyListModel } from '../../../../../../core/models/comment-replies/comment-reply-list-model';
 import { NgClass } from '@angular/common';
 import { EventEmitter } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
-import { CommentReplyEditModel } from '../../../../models/comment-reply-edit-model';
+import { CommentReplyEditModel } from '../../../../../../core/models/comment-replies/comment-reply-edit-model';
 import { VoteType } from '../../../../../../core/enums/vote-types';
-import { CommentReplyVoteService } from '../../../../services/comment-reply-vote.service';
+import { CommentReplyVoteService } from '../../../../../../core/services/comment-reply-vote.service';
 
 @Component({
   selector: 'app-comment-reply',

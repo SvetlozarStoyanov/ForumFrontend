@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommentListModel } from '../models/comment-list-model';
 import { CommentComponent } from "./comment/comment.component";
 import { FormsModule, NgForm } from '@angular/forms';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { CommentCreateModel } from '../models/comment-create-model';
 import { AuthService } from '../../../core/services/auth.service';
-import { CommentService } from '../services/comment.service';
+import { CommentService } from '../../../core/services/comment.service';
 import { VoteType } from '../../../core/enums/vote-types';
-import { CommentEditModel } from '../models/comment-edit-model';
+import { CommentCreateModel } from '../../../core/models/comments/comment-create-model';
+import { CommentEditModel } from '../../../core/models/comments/comment-edit-model';
+import { CommentListModel } from '../../../core/models/comments/comment-list-model';
+
 
 @Component({
   selector: 'app-comment-section',

@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CommentReplyCreateModel } from '../models/comment-reply-create-model';
-import { environment } from '../../../../environment/environment';
-import { CommentReplyEditModel } from '../models/comment-reply-edit-model';
+import { CommentReplyCreateModel } from '../models/comment-replies/comment-reply-create-model';
+import { environment } from '../../../environment/environment';
+import { CommentReplyEditModel } from '../models/comment-replies/comment-reply-edit-model';
 
 @Injectable({
   providedIn: 'root'

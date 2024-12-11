@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { RegisterModel } from '../../../core/models/register-model';
+import { RegisterModel } from '../../../core/models/user-management/register/register-model';
 import { AuthService } from '../../../core/services/auth.service';
 import { UserService } from '../../../core/services/user.service';
 import { NameNotTakenDirective } from '../../../core/directives/name-not-taken.directive';

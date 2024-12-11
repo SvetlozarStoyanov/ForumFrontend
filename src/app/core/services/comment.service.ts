@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { CommentCreateModel } from '../models/comment-create-model';
-import { environment } from '../../../../environment/environment';
-import { CommentListModel } from '../models/comment-list-model';
-import { CommentEditModel } from '../models/comment-edit-model';
+import { environment } from '../../../environment/environment';
+import { CommentCreateModel } from '../models/comments/comment-create-model';
+import { CommentEditModel } from '../models/comments/comment-edit-model';
+import { CommentListModel } from '../models/comments/comment-list-model';
+
 
 @Injectable({
   providedIn: 'root'

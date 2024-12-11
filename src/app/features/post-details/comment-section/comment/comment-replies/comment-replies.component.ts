@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommentReplyListModel } from '../../../models/comment-reply-list-model';
+import { CommentReplyListModel } from '../../../../../core/models/comment-replies/comment-reply-list-model';
 import { CommentReplyComponent } from "./comment-reply/comment-reply.component";
-import { CommentReplyEditModel } from '../../../models/comment-reply-edit-model';
+import { CommentReplyEditModel } from '../../../../../core/models/comment-replies/comment-reply-edit-model';
 
 
 @Component({

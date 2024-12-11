@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SubforumPostListComponent } from "./subforum-post-list/subforum-post-list.component";
-import { SubforumDetailsModel } from '../../core/models/subforum-details-model';
+import { SubforumDetailsModel } from '../../core/models/subforums/subforum-details-model';
 import { SubforumService } from '../../core/services/subforum.service';
 
 @Component({

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
-import { PostListModel } from '../../core/models/post-list-model';
 import { VoteType } from '../../core/enums/vote-types';
 import { FormsModule, NgForm } from '@angular/forms';
-import { PostEditModel } from '../../core/models/post-edit-model';
+import { PostEditModel } from '../../core/models/posts/post-edit-model';
 import { PostVoteService } from '../../core/services/post-vote.service';
+import { PostListModel } from '../../core/models/posts/post-list-model';
 
 @Component({
   selector: 'app-post',

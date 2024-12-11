@@ -1,18 +1,18 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { CommentListModel } from '../../models/comment-list-model';
 import { NgClass } from '@angular/common';
 import { CommentRepliesComponent } from "./comment-replies/comment-replies.component";
 import { FormsModule, NgForm } from '@angular/forms';
-import { CommentReplyCreateModel } from '../../models/comment-reply-create-model';
-import { CommentReplyService } from '../../services/comment-reply.service';
-import { CommentReplyListModel } from '../../models/comment-reply-list-model';
+import { CommentReplyCreateModel } from '../../../../core/models/comment-replies/comment-reply-create-model';
+import { CommentReplyService } from '../../../../core/services/comment-reply.service';
+import { CommentReplyListModel } from '../../../../core/models/comment-replies/comment-reply-list-model';
 import { AuthService } from '../../../../core/services/auth.service';
-import { UserMinInfoModel } from '../../../../core/models/user-min-info-model';
+import { UserMinInfoModel } from '../../../../core/models/users/user-min-info-model';
 import { VoteType } from '../../../../core/enums/vote-types';
 import { Router } from '@angular/router';
-import { CommentReplyEditModel } from '../../models/comment-reply-edit-model';
-import { CommentEditModel } from '../../models/comment-edit-model';
-import { CommentVoteService } from '../../services/comment-vote.service';
+import { CommentReplyEditModel } from '../../../../core/models/comment-replies/comment-reply-edit-model';
+import { CommentVoteService } from '../../../../core/services/comment-vote.service';
+import { CommentEditModel } from '../../../../core/models/comments/comment-edit-model';
+import { CommentListModel } from '../../../../core/models/comments/comment-list-model';
 
 @Component({
   selector: 'app-comment',

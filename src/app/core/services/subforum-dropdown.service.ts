@@ -1,8 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../../environment/environment';
-import { SubforumDropdownModel } from '../models/subforum-dropdown-model';
+
 import { Observable } from 'rxjs';
+import { environment } from '../../../environment/environment';
+import { SubforumDropdownModel } from '../models/subforums/subforum-dropdown-model';
 
 @Injectable({
   providedIn: 'root'

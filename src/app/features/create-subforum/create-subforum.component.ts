@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SubforumCreateModel } from './models/subforum-create-model';
+import { SubforumCreateModel } from '../../core/models/subforums/subforum-create-model';
 import { FormsModule, NgForm } from '@angular/forms';
 import { SubforumService } from '../../core/services/subforum.service';
 import { NameNotTakenDirective } from '../../core/directives/name-not-taken.directive';
@@ -17,7 +17,8 @@ export class CreateSubforumComponent implements OnInit {
   subforumNames: string[] = [];
 
   subforumCreateModel: SubforumCreateModel = {
-    name: ''
+    name: '',
+    description: ''
   };
 
   constructor(private readonly subforumService: SubforumService, private readonly router: Router) {

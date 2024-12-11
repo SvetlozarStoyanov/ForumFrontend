@@ -1,10 +1,10 @@
 import { AfterViewInit, Component, ElementRef, HostListener, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { PostComponent } from '../../../shared/post/post.component';
-import { PostListModel } from '../../../core/models/post-list-model';
 import { PostService } from '../../../core/services/post.service';
 import { Router } from '@angular/router';
-import { PostsQueryModel } from '../../../core/models/posts-query-model';
 import { PostOrder } from '../../../core/enums/post-order';
+import { PostListModel } from '../../../core/models/posts/post-list-model';
+import { PostsQueryModel } from '../../../core/models/posts/posts-query-model';
 
 @Component({
   selector: 'app-post-list',

@@ -1,11 +1,11 @@
 import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
-import { PostListModel } from '../../../core/models/post-list-model';
 import { PostComponent } from '../../../shared/post/post.component';
 import { PostService } from '../../../core/services/post.service';
 import { Router } from '@angular/router';
-import { PostsQueryModel } from '../../../core/models/posts-query-model';
 import { PostOrder } from '../../../core/enums/post-order';
-import { SubforumDetailsModel } from '../../../core/models/subforum-details-model';
+import { SubforumDetailsModel } from '../../../core/models/subforums/subforum-details-model';
+import { PostListModel } from '../../../core/models/posts/post-list-model';
+import { PostsQueryModel } from '../../../core/models/posts/posts-query-model';
 
 @Component({
   selector: 'app-subforum-post-list',

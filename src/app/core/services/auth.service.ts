@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environment/environment';
-import { LoginModel } from '../models/login-model';
+import { LoginModel } from '../models/user-management/login/login-model';
 import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
-import { UserAuthModel } from '../models/user-auth-model';
-import { RegisterModel } from '../models/register-model';
-import { UserMinInfoModel } from '../models/user-min-info-model';
+import { UserAuthModel } from '../models/user-management/auth/user-auth-model';
+import { RegisterModel } from '../models/user-management/register/register-model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +17,7 @@ export class AuthService {
     this.syncAuthState();
   }
 
-  getCurrentUser(): UserMinInfoModel | null {
+  getCurrentUser(): UserAuthModel | null {
     let userAsString = localStorage.getItem('user');
     if (!userAsString) {
       return null;
