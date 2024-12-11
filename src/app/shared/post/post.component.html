@@ -10,10 +10,9 @@
                 Posted by {{ post?.user?.username}}
             </h6>
         </div>
-        <div class="btn-group justify-self-end align-self-start">
-            <button class="btn btn-lg rounded-circle  bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown"
+        <div class="btn-group justify-self-end align-self-start dropstart">
+            <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
-                
             </button>
             <ul class="dropdown-menu">
                 @if (post?.userPermittedActions?.canEdit) {
@@ -29,8 +28,8 @@
             </ul>
         </div>
     </div>
-    <div class="text-start">
-        <h2>{{ post?.title}}</h2>
+    <div class="text-start text-break">
+        <h4>{{ post?.title}}</h4>
     </div>
     @if (isEditing) {
     <form #editPostForm="ngForm" (ngSubmit)="editPostFormSubmit(editPostForm)">
@@ -49,7 +48,7 @@
         </div>
     </form>
     } @else {
-    <p class="text-start text-wrap">
+    <p class="text-start text-break">
         {{ post?.text }}
     </p>
     }

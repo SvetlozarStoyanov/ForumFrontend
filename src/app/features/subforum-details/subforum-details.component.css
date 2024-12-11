@@ -1,0 +1,14 @@
+.top-25 {
+    top: 33% !important;
+}
+
+.top-lg-50 {
+    top: auto; /* Default value for non-lg screens */
+}
+
+@media (min-width: 992px) { /* Bootstrap's lg breakpoint */
+    .top-lg-50 {
+        top: 25%;
+        position: sticky;
+    }
+}
