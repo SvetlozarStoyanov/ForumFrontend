@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { environment } from '../../../environment/environment';
 import { SubforumCreateModel } from '../models/subforums/subforum-create-model';
 import { SubforumDetailsModel } from '../models/subforums/subforum-details-model';
+import { SubforumDropdownModel } from '../models/subforums/subforum-dropdown-model';
+import { SubforumsQueryModel } from '../models/subforums/subforums-query-model';
+import { SubforumListModel } from '../models/subforums/subforum-list-model';
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +17,25 @@ export class SubforumService {
 
   }
 
+  getGuestSubforums(subforumsQueryModel: SubforumsQueryModel) {
+    return this.httpClient.post<SubforumListModel[]>(`${environment.apiUrl}/subforums/get-guest-user-subforums`, subforumsQueryModel);
+  }
+
+  getUnjoinedSubforums(subforumsQueryModel: SubforumsQueryModel) {
+    return this.httpClient.post<SubforumListModel[]>(`${environment.apiUrl}/subforums/get-user-unjoined-subforums`, subforumsQueryModel);
+  }
+
+  getJoinedSubforums(subforumsQueryModel: SubforumsQueryModel) {
+    return this.httpClient.post<SubforumListModel[]>(`${environment.apiUrl}/subforums/get-user-joined-subforums`, subforumsQueryModel);
+  }
+
   getAllSubforumNames(): Observable<string[]> {
     return this.httpClient.get<string[]>(`${environment.apiUrl}/subforums/all-names`);
   }
 
-
+  getSubforumsForDropdown(): Observable<SubforumDropdownModel[]> {
+    return this.httpClient.get<SubforumDropdownModel[]>(`${environment.apiUrl}/subforums/all-for-dropdown`);
+  }
 
   createSubforum(subforumCreateModel: SubforumCreateModel): Observable<{ name: string }> {
     return this.httpClient.post<{ name: string }>(`${environment.apiUrl}/subforums/create`, subforumCreateModel);
