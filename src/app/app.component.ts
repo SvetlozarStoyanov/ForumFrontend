@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { AuthService } from './core/services/auth.service';
 import { HeaderComponent } from "./shared/header/header.component";
+import { SidebarComponent } from "./shared/sidebar/sidebar.component";
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent],
+  imports: [RouterOutlet, HeaderComponent, SidebarComponent],
   providers: [],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
