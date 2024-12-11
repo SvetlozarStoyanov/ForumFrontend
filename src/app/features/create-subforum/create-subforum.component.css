@@ -22,3 +22,26 @@
 .name-input::placeholder {
     color: gainsboro;
 }
+
+textarea {
+    resize: none;
+    border: 1px solid gray;
+    text-indent: 1rem;
+    min-height: 100px;
+}
+
+textarea:hover {
+    border: 1px solid white;
+}
+
+textarea.invalid {
+    border: 1px solid red;
+}
+
+textarea.invalid:hover {
+    border: 1px solid orangered;
+}
+
+textarea::placeholder {
+    color: gainsboro;
+}
