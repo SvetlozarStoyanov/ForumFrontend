@@ -1,0 +1,20 @@
+<section class="d-flex flex-column gap-3">
+    <h4>
+        My subforums
+    </h4>
+    <div class="d-flex flex-row justify-content-between">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                data-bs-toggle="dropdown" aria-expanded="false">
+                {{sortOption}}
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <li><button class="dropdown-item" (click)="onSortChange(0)">Newest</button></li>
+                <li><button class="dropdown-item" (click)="onSortChange(1)">Member Count</button></li>
+                <li><button class="dropdown-item" (click)="onSortChange(2)">Post Count</button></li>
+                <li><button class="dropdown-item" (click)="onSortChange(3)">Oldest</button></li>
+            </ul>
+        </div>
+    </div>
+    <app-subforum-grid [subforums]="subforums" />
+</section>

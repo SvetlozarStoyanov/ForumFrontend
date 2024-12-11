@@ -1,0 +1,22 @@
+<div class="d-flex flex-column bg-dark p-3 rounded-5">
+    <div class="">
+
+        <h5 class="text-start text-break">
+            {{ subforum?.name }}
+        </h5>
+        <div class="d-flex flex-row gap-3 justify-content-between">
+            <p class="text-start text-break">
+                {{ subforum?.memberCount }} Members
+            </p>
+            @if (!subforum?.userIsMember) {
+            <button class="btn btn-success rounded-5">
+                Join
+            </button>
+            } @else {
+            <button class="btn btn-warning rounded-5">
+                Leave
+            </button>
+            }
+        </div>
+    </div>
+</div>

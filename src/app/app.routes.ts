@@ -10,6 +10,9 @@ import { CreateSubforumComponent } from './features/create-subforum/create-subfo
 import { guestGuard } from './core/guards/guest.guard';
 import { authGuard } from './core/guards/auth.guard';
 import { subforumDetailsResolver } from './core/resolvers/subforum-details.resolver';
+import { UnjoinedSubforumsComponent } from './features/unjoined-subforums/unjoined-subforums.component';
+import { JoinedSubforumsComponent } from './features/joined-subforums/joined-subforums.component';
+import { GuestSubforumsComponent } from './features/guest-subforums/guest-subforums.component';
 
 
 
@@ -20,6 +23,9 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent, canActivate: [guestGuard] },
     { path: 'posts/details/:id', component: PostDetailsComponent },
     { path: 'subforums/create', component: CreateSubforumComponent, canActivate: [authGuard] },
+    { path: 'subforums/guest', component: GuestSubforumsComponent, canActivate: [guestGuard] },
+    { path: 'subforums/unjoined', component: UnjoinedSubforumsComponent, canActivate: [authGuard] },
+    { path: 'subforums/joined', component: JoinedSubforumsComponent, canActivate: [authGuard] },
     { path: 'subforums/:name', resolve: { subforumDetailsModel: subforumDetailsResolver }, component: SubforumDetailsComponent },
     { path: 'posts/create', component: CreatePostComponent, canActivate: [authGuard] },
     { path: '**', component: NotFoundComponent },
