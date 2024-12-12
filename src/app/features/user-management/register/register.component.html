@@ -2,7 +2,7 @@
     <article
         class="d-flex flex-column align-self-center justity-content-between py-4 px-5 border border-1 border-white rounded-4">
 
-        <h3 class="text-center my-3">
+        <h3 class="text-center">
             Register
         </h3>
         <form #registerForm="ngForm" (ngSubmit)="onSubmit()" class="d-flex flex-column gap-3 justity-content-center">
@@ -44,26 +44,24 @@
                 <input class="form-control"
                     [ngClass]="[confirmPassword.touched && password.touched && confirmPassword.errors?.['passwordMissmatch'] ? 'border border-4 border-danger' : '']"
                     for="confirmPassword" name="confirmPassword" type="password"
-                    [(ngModel)]="registerModel.confirmPassword" #confirmPassword="ngModel"
-                    appPasswordMatch="password" required />
+                    [(ngModel)]="registerModel.confirmPassword" #confirmPassword="ngModel" appPasswordMatch="password"
+                    required />
                 @if (confirmPassword.touched && confirmPassword.errors?.['passwordMissmatch']) {
                 <span class="text-danger">
                     Passwords must match!
                 </span>
                 }
             </div>
-            <div class="d-flex flex-column gap-3 align-self-center my-2">
+            <div class="d-flex flex-column gap-3 align-self-center gap-3 my-2">
                 <button class="btn btn-lg btn-primary" [disabled]="registerForm.invalid" type="submit">
                     Register
                 </button>
-                <div class="d-flex flex-column align-self-center">
-                    <h5 class="text-center">
-                        Already have an account?
-                    </h5>
-                    <button class="btn btn-lg btn-success" type="button" routerLink="/login">
+                <h5 class="text-center">
+                    Already have an account?
+                    <a routerLink="/login">
                         Login
-                    </button>
-                </div>
+                    </a>
+                </h5>
             </div>
         </form>
     </article>
