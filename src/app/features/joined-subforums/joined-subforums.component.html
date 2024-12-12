@@ -16,5 +16,6 @@
             </ul>
         </div>
     </div>
-    <app-subforum-grid [subforums]="subforums" />
+    <app-subforum-grid [subforums]="subforums" (leaveSubforumEvent)="leaveSubforum($event)"
+        (loadMoreSubforums)="loadMoreSubforums()" [subforumLimitReached]="subforumLimitReached" />
 </section>

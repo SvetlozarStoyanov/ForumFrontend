@@ -1,19 +1,21 @@
-<div class="d-flex flex-column bg-dark p-3 rounded-5">
-    <div class="">
-
-        <h5 class="text-start text-break">
-            {{ subforum?.name }}
-        </h5>
-        <div class="d-flex flex-row gap-3 justify-content-between">
+<div class="subforum-container d-flex flex-column justify-items-center bg-dark p-3 rounded-5" 
+[routerLink]="['/subforums', subforum?.name]">
+    <div class="d-flex flex-row gap-3 justify-content-between align-items-center">
+        <div class="">
+            <h5 class="text-start text-break">
+                {{ subforum?.name }}
+            </h5>
             <p class="text-start text-break">
-                {{ subforum?.memberCount }} Members
+                {{ subforum?.memberCount! | membercount}}
             </p>
+        </div>
+        <div class="">
             @if (!subforum?.userIsMember) {
-            <button class="btn btn-success rounded-5">
+            <button class="btn btn-success rounded-5" (click)="joinClick($event)">
                 Join
             </button>
             } @else {
-            <button class="btn btn-warning rounded-5">
+            <button class="btn btn-warning rounded-5" (click)="leaveClick($event)">
                 Leave
             </button>
             }

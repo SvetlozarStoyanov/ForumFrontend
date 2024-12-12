@@ -13,11 +13,8 @@ import { SubforumService } from '../../core/services/subforum.service';
   styleUrl: './unjoined-subforums.component.css'
 })
 export class UnjoinedSubforumsComponent implements OnInit {
-
-  private observer!: IntersectionObserver;
-  private subforumLimitReached: boolean = false;
+  subforumLimitReached: boolean = false;
   subforums: SubforumListModel[] = [];
-  @ViewChildren('subforum') subforumElements!: QueryList<ElementRef>;
   sortOption: string = SubforumOrder[0];
   isLoading: boolean = false;
   subforumsQueryModel: SubforumsQueryModel = {
@@ -33,8 +30,10 @@ export class UnjoinedSubforumsComponent implements OnInit {
     this.loadSubforums();
   }
 
-  ngAfterViewInit() {
-    this.setupObserver();
+  joinSubforum(subforum: SubforumListModel) {
+    this.subforumService.joinSubforum(subforum.id).subscribe(res => {
+      this.subforums = this.subforums.filter(x => x.id !== subforum.id);
+    });
   }
 
   onSortChange(value: number) {
@@ -42,8 +41,16 @@ export class UnjoinedSubforumsComponent implements OnInit {
       this.subforums = [];
       this.subforumsQueryModel.order = value;
       this.subforumsQueryModel.page = 1;
+      this.subforumLimitReached = false;
       this.loadSubforums();
       this.sortOption = SubforumOrder[value];
+    }
+  }
+
+  loadMoreSubforums() {
+    if (!this.subforumLimitReached) {
+      this.subforumsQueryModel.page++;
+      this.loadSubforums();
     }
   }
 
@@ -56,21 +63,6 @@ export class UnjoinedSubforumsComponent implements OnInit {
         this.subforumLimitReached = true;
       }
       this.isLoading = false;
-    });
-  }
-
-  private setupObserver(): void {
-    this.observer = new IntersectionObserver((entries) => {
-      const lastEntry = entries.find((entry) => entry.isIntersecting);
-      if (lastEntry && !this.isLoading && !this.subforumLimitReached) {
-        this.subforumsQueryModel.page++;
-        this.loadSubforums();
-      }
-    });
-    this.subforumElements.changes.subscribe(() => {
-      if (this.subforumElements.last) {
-        this.observer.observe(this.subforumElements.last.nativeElement);
-      }
     });
   }
 }
