@@ -2,6 +2,27 @@
     cursor: pointer;
 }
 
+.search-input-form{
+    border: 1px solid gray;
+    text-indent: 1rem;
+}
+
+.search-input-form:hover {
+    border: 1px solid white;
+}
+
+.search-input-form-form.invalid {
+    border: 1px solid red;
+}
+
+.search-input-form.invalid:hover {
+    border: 1px solid orangered;
+}
+
+.search-input-form::placeholder {
+    color: gainsboro;
+}
+
 @media (max-width: 1599px) {
     .subforum-links .nav-item {
         display: flex;
