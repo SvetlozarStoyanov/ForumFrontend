@@ -1,0 +1,10 @@
+.subforum-wrapper {
+    background-color: rgb(40, 40, 40);
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.subforum-wrapper:hover {
+    background-color: rgb(64, 64, 64);
+    transition: background-color 0.5s ease;
+}

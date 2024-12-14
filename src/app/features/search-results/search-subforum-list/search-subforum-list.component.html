@@ -1,0 +1,17 @@
+<article class="d-flex flex-column gap-3">
+    @if (subforums.length > 0) {
+    <div class="d-flex flex-column gap-3">
+        @for (subforum of subforums; track $index) {
+        <div class="subforum-wrapper px-2 py-1 rounded-5" [routerLink]="['/subforums', subforum.name]">
+            <app-search-subforum [subforum]="subforum" />
+        </div>
+        }
+    </div>
+    } @else {
+    <div>
+        <h3 class="text-center">
+            No subforums were found!
+        </h3>
+    </div>
+    }
+</article>

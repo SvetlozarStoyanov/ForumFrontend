@@ -1,0 +1,18 @@
+<article class="d-flex flex-column gap-3">
+    @if (users.length > 0) {
+    <div class="d-flex flex-column gap-3">
+        @for (user of users; track $index) {
+        <div class="user-wrapper px-2 py-1 rounded-5" #user [routerLink]="['/users/', user?.username]">
+            <app-search-user [user]=" user" />
+        </div>
+        }
+    </div>
+
+    } @else {
+    <div>
+        <h3 class="text-center">
+            No users were found!
+        </h3>
+    </div>
+    }
+</article>

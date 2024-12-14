@@ -1,0 +1,20 @@
+.search-input {
+    border: 1px solid gray;
+    text-indent: 1rem;
+}
+
+.search-input:hover {
+    border: 1px solid white;
+}
+
+.search-input.invalid {
+    border: 1px solid red;
+}
+
+.search-input.invalid:hover {
+    border: 1px solid orangered;
+}
+
+.search-input::placeholder {
+    color: gainsboro;
+}

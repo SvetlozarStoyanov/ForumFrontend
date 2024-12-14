@@ -1,0 +1,37 @@
+<section class="d-flex flex-column gap-3">
+    <div class="d-flex flex-row gap-3">
+        <div>
+            <button class="btn btn-lg border-0 rounded-4"
+                [ngClass]="[searchType === searchTypes.Subforums ? 'btn-secondary' : 'btn-dark']"
+                (click)="searchSubforumsClick()">
+                Subforums
+            </button>
+        </div>
+        <div>
+            <button class="btn btn-lg border-0 rounded-4" [ngClass]="[searchType === searchTypes.Posts ? 'btn-secondary' : 'btn-dark']"
+                (click)="searchPostsClick()">
+                Posts
+            </button>
+        </div>
+        <div>
+            <button class="btn btn-lg border-0 rounded-4" [ngClass]="[searchType === searchTypes.Users ? 'btn-secondary' : 'btn-dark']"
+                (click)="searchUsersClick()">
+                Users
+            </button>
+        </div>
+    </div>
+    @if (isLoading){
+    <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="loader fs-4"></div>
+    </div>
+    } @else {
+
+    @if (searchType === searchTypes.Subforums) {
+    <app-search-subforum-list [subforums]="subforums" />
+    } @else if(searchType === searchTypes.Posts) {
+    <app-search-post-list [posts]="posts" />
+    } @else if (searchType === searchTypes.Users) {
+    <app-search-user-list [users]="users" />
+    }
+    }
+</section>
