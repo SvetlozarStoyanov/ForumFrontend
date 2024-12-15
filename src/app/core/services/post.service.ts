@@ -6,6 +6,7 @@ import { PostCreateModel } from '../models/posts/post-create-model';
 import { PostListModel } from '../models/posts/post-list-model';
 import { PostsQueryModel } from '../models/posts/posts-query-model';
 import { PostDetailsModel } from '../models/posts/post-details-model';
+import { PostSearchModel } from '../models/posts/post-search-model';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,15 @@ export class PostService {
     return this.httpClient.post<PostListModel[]>(`${environment.apiUrl}/posts/get-subforum-posts/${subforumId}`, postsQueryModel);
   }
 
-  getPostDetailsById(id: string){
+  getPostsFromUser(username: string, postsQueryModel: PostsQueryModel) {
+    return this.httpClient.post<PostListModel[]>(`${environment.apiUrl}/posts/get-user-posts/${username}`, postsQueryModel);
+  }
+
+  searchPosts(searchTerm: string) {
+    return this.httpClient.get<PostSearchModel[]>(`${environment.apiUrl}/posts/search/${searchTerm}`);
+  }
+
+  getPostDetailsById(id: string) {
     return this.httpClient.get<PostDetailsModel>(`${environment.apiUrl}/posts/details/${id}`);
   }
 
@@ -35,9 +44,7 @@ export class PostService {
   updatePost(postEditModel: PostEditModel) {
     return this.httpClient.put(`${environment.apiUrl}/posts/update/${postEditModel.id}`, postEditModel);
   }
-
   
-
   deletePost(id: number) {
     return this.httpClient.delete(`${environment.apiUrl}/posts/delete/${id}`);
   }

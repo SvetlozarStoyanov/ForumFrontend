@@ -7,6 +7,7 @@ import { SubforumDetailsModel } from '../models/subforums/subforum-details-model
 import { SubforumDropdownModel } from '../models/subforums/subforum-dropdown-model';
 import { SubforumsQueryModel } from '../models/subforums/subforums-query-model';
 import { SubforumListModel } from '../models/subforums/subforum-list-model';
+import { SubforumSearchModel } from '../models/subforums/subforum-search-model';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,14 @@ export class SubforumService {
     return this.httpClient.get<SubforumDropdownModel[]>(`${environment.apiUrl}/subforums/all-for-dropdown`);
   }
 
+  searchSubforums(searchTerm: string) {
+    return this.httpClient.get<SubforumSearchModel[]>(`${environment.apiUrl}/subforums/search/${searchTerm}`);
+  }
+
+  getSubforumByName(name: string) {
+    return this.httpClient.get<SubforumDetailsModel>(`${environment.apiUrl}/subforums/${name}`);
+  }
+
   createSubforum(subforumCreateModel: SubforumCreateModel): Observable<{ name: string }> {
     return this.httpClient.post<{ name: string }>(`${environment.apiUrl}/subforums/create`, subforumCreateModel);
   }
@@ -49,7 +58,4 @@ export class SubforumService {
     return this.httpClient.post(`${environment.apiUrl}/subforums/leave/${subforumId}`, {});
   }
 
-  getSubforumByName(name: string) {
-    return this.httpClient.get<SubforumDetailsModel>(`${environment.apiUrl}/subforums/${name}`);
-  }
 }
