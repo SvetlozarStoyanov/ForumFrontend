@@ -11,7 +11,6 @@ import { RouterLink } from '@angular/router';
   styleUrl: './subforum.component.css'
 })
 export class SubforumComponent {
-
   @Input() subforum?: SubforumListModel
   @Output() joinEvent = new EventEmitter<SubforumListModel>();
   @Output() leaveEvent = new EventEmitter<SubforumListModel>();

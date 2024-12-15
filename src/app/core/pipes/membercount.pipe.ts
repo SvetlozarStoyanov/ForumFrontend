@@ -10,9 +10,9 @@ export class MemberCountPipe implements PipeTransform {
     let membercountText: string = '';
 
     if (membercount > 1000000) {
-      membercountText = `${membercount / 1000000} members`;
+      membercountText = `${membercount / 1000000}M members`;
     } else if (membercount > 1000) {
-      membercountText = `${membercount / 1000} members`;
+      membercountText = `${membercount / 1000}K members`;
     } else if (membercount === 1) {
       membercountText = `1 member`;
     } else if (membercount === 0) {
@@ -20,7 +20,7 @@ export class MemberCountPipe implements PipeTransform {
     } else {
       membercountText = `${membercount} members`;
     }
-    
+
     return membercountText;
   }
 

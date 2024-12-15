@@ -1,8 +1,8 @@
-<article class="row row-cols-lg-3 row-cols-md-2 row-cols-1 gy-5">
+<article class="row row-cols-lg-3 row-cols-1 gy-5">
     @for (subforum of subforums; track $index) {
     <div class="col" #subforum>
-        <app-subforum  [subforum]="subforum"
-            (joinEvent)="joinSubforumClick($event)" (leaveEvent)="leaveSubforumClick($event)" />
+        <app-subforum [subforum]="subforum" (joinEvent)="joinSubforumClick($event)"
+            (leaveEvent)="leaveSubforumClick($event)" />
     </div>
     }
 </article>

@@ -6,27 +6,28 @@
         <div class="form-group d-flex flex-column gap-2">
             <!-- <label for="name" class="form-label fs-5">Title</label> -->
             <input name="name" class="name-input p-2 fs-3 bg-dark text-white rounded-5" autocomplete="off" required
-                placeholder="Name" [ngClass]="[name.errors?.['forbidden'] ? 'invalid':'']"
+                pattern="^[a-z]+$" placeholder="Name" [ngClass]="[name.errors?.['forbidden'] ? 'invalid':'']"
                 [(ngModel)]="subforumCreateModel.name" #name="ngModel" [appNameNotTaken]="subforumNames" />
             @if (name.touched && name.errors?.['forbidden']) {
             <span class="text-danger fs-5">
-               {{ name.value }} is already taken!
+                {{ name.value }} is already taken!
             </span>
-            }
+            } @else if (name.touched && name.errors?.['pattern']) {
+                <span class="text-danger fs-5">
+                    Must contain only lowercase letters!
+                </span>
+                }
         </div>
         <div class="form-group d-flex flex-column gap-2">
             <textarea name="description" class="p-2 bg-dark text-white rounded-5" required placeholder="Text"
                 [(ngModel)]="subforumCreateModel.description" #description="ngModel"></textarea>
-                @if (description.touched && description.errors?.['required']) {
-                    <span class="text-danger fs-5">
-                        Description is required!
-                    </span>
-                    }    
-            </div>
+            @if (description.touched && description.errors?.['required']) {
+            <span class="text-danger fs-5">
+                Description is required!
+            </span>
+            }
+        </div>
         <div class="d-flex flex-row gap-3 align-self-end">
-            <button class="btn btn-lg btn-secondary" type="button">
-                Cancel
-            </button>
             <button class="btn btn-lg btn-success" type="submit" [disabled]="createSubforumForm.invalid">
                 Create
             </button>

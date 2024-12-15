@@ -1,1 +1,8 @@
-<app-post-list />
+<section class="d-flex flex-column">
+    <h3 class="text-center">
+        Posts
+    </h3>
+    <app-post-list [posts]="posts"
+    (loadMorePostsEvent)="loadMorePosts($event)" (sortChangeEvent)="sortChange($event)"
+        (deletePostEvent)="deletePost($event)" />
+</section>

@@ -1,19 +1,26 @@
 <div class="d-flex flex-column gap-3 p-3">
     <div class="d-flex flex-row justify-content-between">
         <div class="d-flex flex-column gap-3">
-            <a [routerLink]="['/subforums/', post?.subforum?.name]" (click)="$event.stopPropagation()">
+            @if (post?.subforum) {
+            <a class="link-success" [routerLink]="['/subforums/', post?.subforum?.name]"
+                (click)="$event.stopPropagation()">
                 <h5 class="fst-italic text-start">
-                    Subforum: {{ post?.subforum?.name}}
+                    {{ post?.subforum?.name}}
                 </h5>
             </a>
-            <h6 class="ms-1 text-start">
-                Posted by {{ post?.user?.username}}
-            </h6>
+            }
+            <a class="link-info" [routerLink]="['/users/', post?.user?.username]" (click)="$event.stopPropagation()">
+                <h5 class="fst-italic text-start">
+                    by {{ post?.user?.username}}
+                </h5>
+            </a>
         </div>
+        @if (post?.userPermittedActions?.canEdit || post?.userPermittedActions?.canDelete) {
         <div class="btn-group justify-self-end align-self-start dropstart">
             <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
             </button>
+
             <ul class="dropdown-menu">
                 @if (post?.userPermittedActions?.canEdit) {
                 <li class="dropdown-item" (click)="onEditEvent($event)">
@@ -27,6 +34,7 @@
                 }
             </ul>
         </div>
+        }
     </div>
     <div class="text-start text-break">
         <h4>{{ post?.title}}</h4>

@@ -9,11 +9,15 @@
             <div class="form-group">
                 <label for="username" class="form-label">Username</label>
                 <input class="form-control" for="username" name="username" type="text"
-                    [(ngModel)]="registerModel.username" #username="ngModel" [appNameNotTaken]="allUsernames"
-                    required />
+                    [(ngModel)]="registerModel.username" #username="ngModel" [appNameNotTaken]="allUsernames" required
+                    pattern="^[a-z]+$" />
                 @if ( username.touched && username.errors?.['forbidden']) {
                 <span class="text-danger">
                     Username is already taken!
+                </span>
+                } @else if (username.touched && username.errors?.['pattern']) {
+                <span class="text-danger mw-100">
+                    Must contain only lowercase letters!
                 </span>
                 }
             </div>

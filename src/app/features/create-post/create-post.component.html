@@ -5,8 +5,7 @@
     <form #createPostForm="ngForm" (ngSubmit)="onSubmit(createPostForm)" class="d-flex flex-column gap-5">
         <div class="from-group">
             <label for="subforumId" class="fs-5">Subforum</label>
-            <select class="form-select bg-dark text-white" name="subforumId" 
-            [(ngModel)]="selectedSubforum">
+            <select class="form-select bg-dark text-white" name="subforumId" [(ngModel)]="selectedSubforum">
                 @for (subforum of subforumsForDropdown; track $index) {
                 <option [ngValue]="subforum"> {{subforum.name}}</option>
                 }
@@ -21,10 +20,7 @@
                 [(ngModel)]="postCreateModel.text"></textarea>
         </div>
         <div class="d-flex flex-row gap-3 align-self-end">
-            <button class="btn btn-lg btn-secondary" type="button">
-                Cancel
-            </button>
-            <button class="btn btn-lg btn-success" type="submit">
+            <button class="btn btn-lg btn-success" type="submit" [disabled]="createPostForm.invalid">
                 Create
             </button>
         </div>
