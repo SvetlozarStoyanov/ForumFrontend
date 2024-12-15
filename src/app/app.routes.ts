@@ -13,6 +13,9 @@ import { subforumDetailsResolver } from './core/resolvers/subforum-details.resol
 import { UnjoinedSubforumsComponent } from './features/unjoined-subforums/unjoined-subforums.component';
 import { JoinedSubforumsComponent } from './features/joined-subforums/joined-subforums.component';
 import { GuestSubforumsComponent } from './features/guest-subforums/guest-subforums.component';
+import { UserDetailsComponent } from './features/user-details/user-details.component';
+import { userDetailsResolver } from './core/resolvers/user-details.resolver';
+import { SearchResultsComponent } from './features/search-results/search-results.component';
 
 
 
@@ -28,5 +31,7 @@ export const routes: Routes = [
     { path: 'subforums/joined', component: JoinedSubforumsComponent, canActivate: [authGuard] },
     { path: 'subforums/:name', resolve: { subforumDetailsModel: subforumDetailsResolver }, component: SubforumDetailsComponent },
     { path: 'posts/create', component: CreatePostComponent, canActivate: [authGuard] },
+    { path: 'search-results', component: SearchResultsComponent },
+    { path: 'users/:username', resolve: { userDetailsModel: userDetailsResolver }, component: UserDetailsComponent },
     { path: '**', component: NotFoundComponent },
 ];
