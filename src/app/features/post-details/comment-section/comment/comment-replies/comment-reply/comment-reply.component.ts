@@ -6,11 +6,12 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { CommentReplyEditModel } from '../../../../../../core/models/comment-replies/comment-reply-edit-model';
 import { VoteType } from '../../../../../../core/enums/vote-types';
 import { CommentReplyVoteService } from '../../../../../../core/services/comment-reply-vote.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-comment-reply',
   standalone: true,
-  imports: [NgClass, FormsModule],
+  imports: [NgClass, FormsModule, RouterLink],
   templateUrl: './comment-reply.component.html',
   styleUrl: './comment-reply.component.css'
 })

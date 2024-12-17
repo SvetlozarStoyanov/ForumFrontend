@@ -8,7 +8,7 @@ import { CommentReplyListModel } from '../../../../core/models/comment-replies/c
 import { AuthService } from '../../../../core/services/auth.service';
 import { UserMinInfoModel } from '../../../../core/models/users/user-min-info-model';
 import { VoteType } from '../../../../core/enums/vote-types';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommentReplyEditModel } from '../../../../core/models/comment-replies/comment-reply-edit-model';
 import { CommentVoteService } from '../../../../core/services/comment-vote.service';
 import { CommentEditModel } from '../../../../core/models/comments/comment-edit-model';
@@ -17,19 +17,18 @@ import { CommentListModel } from '../../../../core/models/comments/comment-list-
 @Component({
   selector: 'app-comment',
   standalone: true,
-  imports: [NgClass, CommentRepliesComponent, FormsModule],
+  imports: [NgClass, CommentRepliesComponent, FormsModule, RouterLink],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css'
 })
 export class CommentComponent {
-
-
   @ViewChild('createReplyDiv') toggleReplyBtn!: ElementRef;
   @Input() comment?: CommentListModel;
   @Output() editEvent = new EventEmitter<CommentEditModel>();
   @Output() deleteEvent = new EventEmitter<number>();
 
   isEditing: boolean = false;
+  isCreatingReply: boolean = false;
   voteType = VoteType;
   commentEditModel: CommentEditModel = {
     id: 0,
@@ -48,15 +47,18 @@ export class CommentComponent {
   }
 
   replyBtnClick() {
+    if (this.isCreatingReply) {
+      return;
+    }
     let user: UserMinInfoModel | null = this.authService.getCurrentUser();
 
     if (!user) {
       this.router.navigate(['login']);
     }
-    this.toggleReplyBtn.nativeElement.classList.toggle('d-none');
+    this.isCreatingReply = true;
   }
 
-  createCommentSubmit(createCommentReplyForm: NgForm) {
+  createCommentReplySubmit(createCommentReplyForm: NgForm) {
     let user: UserMinInfoModel | null = this.authService.getCurrentUser();
     let addedCommentReply: CommentReplyListModel = {
       id: 0,
@@ -75,9 +77,14 @@ export class CommentComponent {
     this.commentReplyService.createCommentReply(this.newCommentReply).subscribe(res => {
       addedCommentReply.id = res;
       this.comment!.replies = [addedCommentReply, ...this.comment?.replies!]
+      createCommentReplyForm.reset();
+      this.isCreatingReply = false;
     });
-    createCommentReplyForm.reset();
-    this.toggleReplyBtn.nativeElement.classList.toggle('d-none');
+  }
+
+  cancelCreatingReply($event: MouseEvent, createCommentReplyForm: NgForm) {
+    createCommentReplyForm.resetForm();
+    this.isCreatingReply = false;
   }
 
   deleteReply(replyId: number) {

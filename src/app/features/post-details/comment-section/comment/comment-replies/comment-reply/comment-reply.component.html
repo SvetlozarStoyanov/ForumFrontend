@@ -2,13 +2,14 @@
 
     <div class="d-flex flex-column justify-content-around">
         <div class="d-flex flex-row justify-content-between">
-            <h5>
-                By {{ reply?.user?.username}}
-            </h5>
+            <a class="link-info" [routerLink]="['/users/', reply?.user?.username]">
+                <h5 class="fst-italic text-start">
+                    u/{{ reply?.user?.username}}
+                </h5>
+            </a>
             <div class="btn-group">
-                <button class="btn btn-lg btn-secondary bg-dark rounded-circle" type="button" data-bs-toggle="dropdown"
+                <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical border-0" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false">
-                    ...
                 </button>
                 <ul class="dropdown-menu">
                     @if (reply?.userPermittedActions?.canEdit) {
@@ -35,7 +36,7 @@
                         Cancel
                     </button>
                     <button class="btn btn-lg btn-success p-3" type="submit">
-                        Post
+                        Save
                     </button>
                 </div>
             </div>

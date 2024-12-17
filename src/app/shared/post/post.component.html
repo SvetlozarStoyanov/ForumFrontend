@@ -5,19 +5,19 @@
             <a class="link-success" [routerLink]="['/subforums/', post?.subforum?.name]"
                 (click)="$event.stopPropagation()">
                 <h5 class="fst-italic text-start">
-                    {{ post?.subforum?.name}}
+                    s/{{ post?.subforum?.name}}
                 </h5>
             </a>
             }
             <a class="link-info" [routerLink]="['/users/', post?.user?.username]" (click)="$event.stopPropagation()">
                 <h5 class="fst-italic text-start">
-                    by {{ post?.user?.username}}
+                     u/{{ post?.user?.username}}
                 </h5>
             </a>
         </div>
         @if (post?.userPermittedActions?.canEdit || post?.userPermittedActions?.canDelete) {
         <div class="btn-group justify-self-end align-self-start dropstart">
-            <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical" type="button" data-bs-toggle="dropdown"
+            <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical border-0" type="button" data-bs-toggle="dropdown"
                 aria-expanded="false">
             </button>
 
@@ -50,7 +50,7 @@
                     Cancel
                 </button>
                 <button class="btn btn-lg btn-success p-3" type="submit">
-                    Post
+                    Save
                 </button>
             </div>
         </div>

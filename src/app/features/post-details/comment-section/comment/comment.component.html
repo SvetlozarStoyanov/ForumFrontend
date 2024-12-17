@@ -1,13 +1,15 @@
 <div class="d-flex flex-column gap-3 p-3 border border-2 border-white border-opacity-25 rounded-5">
     <div class="d-flex flex-column gap-2 p-3 justify-content-evenly">
         <div class="d-flex flex-row justify-content-between">
-            <h5>
-                By {{ comment?.user?.username}}
-            </h5>
+            <a class="link-info" [routerLink]="['/users/', comment?.user?.username]">
+                <h5 class="fst-italic text-start">
+                    u/{{ comment?.user?.username}}
+                </h5>
+            </a>
+            @if (comment?.userPermittedActions?.canEdit || comment?.userPermittedActions?.canDelete) {
             <div class="btn-group">
-                <button class="btn btn-lg btn-secondary bg-dark rounded-circle" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                    ...
+                <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical border-0" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                 </button>
                 <ul class="dropdown-menu">
                     @if (comment?.userPermittedActions?.canEdit) {
@@ -22,23 +24,24 @@
                     }
                 </ul>
             </div>
+            }
         </div>
         @if (isEditing) {
-            <form #editCommentForm="ngForm" (ngSubmit)="editCommentFormSubmit(editCommentForm)">
-                <div class="form-group d-flex flex-column gap-1">
-                    <label for="text" class="form-label">Edit text</label>
-                    <textarea name="text" class="form-control-lg flex-grow-2 bg-dark text-white"
-                        [(ngModel)]="commentEditModel.text"></textarea>
-                    <div class="btn-group align-self-end">
-                        <button class="btn btn-lg btn-secondary p-3" type="button" (click)="onCancel($event)">
-                            Cancel
-                        </button>
-                        <button class="btn btn-lg btn-success p-3" type="submit">
-                            Post
-                        </button>
-                    </div>
+        <form #editCommentForm="ngForm" (ngSubmit)="editCommentFormSubmit(editCommentForm)">
+            <div class="form-group d-flex flex-column gap-1">
+                <label for="text" class="form-label">Edit text</label>
+                <textarea name="text" class="form-control-lg flex-grow-2 bg-dark text-white"
+                    [(ngModel)]="commentEditModel.text"></textarea>
+                <div class="btn-group align-self-end">
+                    <button class="btn btn-lg btn-secondary p-3" type="button" (click)="onCancel($event)">
+                        Cancel
+                    </button>
+                    <button class="btn btn-lg btn-success p-3" type="submit">
+                        Save
+                    </button>
                 </div>
-            </form>
+            </div>
+        </form>
         } @else {
 
         <p class="fs-5 text-wrap text-start">
@@ -48,35 +51,43 @@
     </div>
     <div class="d-flex flex-row align-items-center align-content-center">
         <button class="btn upvote-btn bg-dark bg-opacity-75 rounded-circle bi bi-arrow-up fs-4"
-        [ngClass]="[comment?.userVote?.voteType === voteType.Up ? 'upvoted-btn' : 'upvote-btn']"
-        (click)="upvoteClick()">
+            [ngClass]="[comment?.userVote?.voteType === voteType.Up ? 'upvoted-btn' : 'upvote-btn']"
+            (click)="upvoteClick()">
         </button>
         <button class="btn downvote-btn bg-dark bg-opacity-75 rounded-circle bi bi-arrow-down fs-4"
-        [ngClass]="[comment?.userVote?.voteType === voteType.Down ? 'downvoted-btn' : 'downvote-btn']"
-        (click)="downvoteClick()">
+            [ngClass]="[comment?.userVote?.voteType === voteType.Down ? 'downvoted-btn' : 'downvote-btn']"
+            (click)="downvoteClick()">
         </button>
         <span class="text-center fs-4 px-2" [ngClass]="[comment?.voteTally! > 0 ? 'upvoted-tally' 
             : comment?.voteTally! < 0 ? 'downvoted-tally' 
             : '']">
-           {{ comment?.voteTally }}
-       </span>
+            {{ comment?.voteTally }}
+        </span>
         <button class="btn text-center fs-4 px-2 bg-dark rounded-5 p-2" (click)="replyBtnClick()">
             <i class="bi bi-chat rounded-circle "></i>
             Reply
         </button>
     </div>
-
-    <div class="d-flex flex-column gap-2 ms-3 p-4 d-none" #createReplyDiv>
-        <form #createCommentReplyForm="ngForm" (ngSubmit)="createCommentSubmit(createCommentReplyForm)">
+    @if (isCreatingReply) {
+    <div class="d-flex flex-column gap-2 ms-3 p-4" #createReplyDiv>
+        <form #createCommentReplyForm="ngForm" (ngSubmit)="createCommentReplySubmit(createCommentReplyForm)">
             <div class="form-group d-flex flex-column gap-2">
                 <label for="text" class="form-label fs-5">Share your thoughts</label>
                 <textarea name="text" [(ngModel)]="newCommentReply.text"
                     class="form-control-lg flex-grow-2 bg-dark text-white" placeholder="Reply..." rows="1"></textarea>
-                <button class="align-self-end flex-grow 1 btn btn-lg btn-success p-3 align-self-end"
-                    type="submit">Post</button>
+                <div class="d-flex flex-row gap-2 align-self-end">
+                    <button class="align-self-end flex-grow 1 btn btn-lg btn-secondary p-3" type="button"
+                        (click)="cancelCreatingReply($event, createCommentReplyForm)">
+                        Cancel
+                    </button>
+                    <button class="align-self-end flex-grow 1 btn btn-lg btn-success p-3" type="submit">
+                        Post
+                    </button>
+                </div>
             </div>
         </form>
     </div>
+    }
     <div>
         <app-comment-replies [replies]="comment!.replies" (onReplyEdit)="editReply($event)"
             (onReplyDelete)="deleteReply($event)" />
