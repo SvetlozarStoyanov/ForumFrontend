@@ -1,4 +1,10 @@
-.magnifying-glass {
+
+.not-found-404 {
+    font-size: 10rem;
+    user-select: none;
+}
+
+.float-anim {
     animation-name: float;
     animation-duration: 2000ms;
     animation-iteration-count: infinite;
@@ -7,14 +13,14 @@
 
 @keyframes float {
     0% {
-        transform: translateY(0) translateX(20px);
+        transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-20px) translateX(-20px);
+        transform:  translateY(-10px);
     }
 
     100% {
-        transform: translateY(0) translateX(20px)
+        transform: translateY(0)
     }
 }
