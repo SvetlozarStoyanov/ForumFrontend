@@ -2,14 +2,19 @@
 
     <div class="d-flex flex-column justify-content-around">
         <div class="d-flex flex-row justify-content-between">
-            <a class="link-info" [routerLink]="['/users/', reply?.user?.username]">
-                <h5 class="fst-italic text-start">
-                    u/{{ reply?.user?.username}}
-                </h5>
-            </a>
+            <div class="d-flex flex-column gap-3">
+                <a class="link-info" [routerLink]="['/users/', reply?.user?.username]">
+                    <h5 class="fst-italic text-start">
+                        u/{{ reply?.user?.username}}
+                    </h5>
+                </a>
+                <div>
+                    <span>{{ reply?.createdOn! | datedisplay}}</span>
+                </div>
+            </div>
             <div class="btn-group">
-                <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical border-0" type="button" data-bs-toggle="dropdown"
-                    aria-expanded="false">
+                <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical border-0" type="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                 </button>
                 <ul class="dropdown-menu">
                     @if (reply?.userPermittedActions?.canEdit) {
@@ -42,24 +47,24 @@
             </div>
         </form>
         } @else {
-        <p class="fs-5 text-wrap text-start">
+        <p class="fs-5 text-wrap text-start mt-3">
             {{ reply?.text}}
         </p>
         }
     </div>
     <div class="d-flex flex-row align-items-center align-content-center">
         <button class="btn upvote-btn bg-dark bg-opacity-75 rounded-circle bi bi-arrow-up fs-4"
-        [ngClass]="[reply?.userVote?.voteType === voteType.Up ? 'upvoted-btn' : 'upvote-btn']"
-        (click)="upvoteClick()">
+            [ngClass]="[reply?.userVote?.voteType === voteType.Up ? 'upvoted-btn' : 'upvote-btn']"
+            (click)="upvoteClick()">
         </button>
         <button class="btn downvote-btn bg-dark bg-opacity-75 rounded-circle bi bi-arrow-down fs-4"
-        [ngClass]="[reply?.userVote?.voteType === voteType.Down ? 'downvoted-btn' : 'downvote-btn']"
-        (click)="downvoteClick()">
+            [ngClass]="[reply?.userVote?.voteType === voteType.Down ? 'downvoted-btn' : 'downvote-btn']"
+            (click)="downvoteClick()">
         </button>
         <span class="text-center fs-4 px-2" [ngClass]="[reply?.voteTally! > 0 ? 'upvoted-tally' 
             : reply?.voteTally! < 0 ? 'downvoted-tally' 
             : '']">
-           {{ reply?.voteTally }}
-       </span>
+            {{ reply?.voteTally }}
+        </span>
     </div>
 </div>

@@ -11,14 +11,20 @@
             }
             <a class="link-info" [routerLink]="['/users/', post?.user?.username]" (click)="$event.stopPropagation()">
                 <h5 class="fst-italic text-start">
-                     u/{{ post?.user?.username}}
+                    u/{{ post?.user?.username}}
                 </h5>
             </a>
+
+
+            <div>
+                <h6>{{post?.createdOn! | datedisplay}}</h6>
+            </div>
+
         </div>
         @if (post?.userPermittedActions?.canEdit || post?.userPermittedActions?.canDelete) {
         <div class="btn-group justify-self-end align-self-start dropstart">
-            <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical border-0" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
+            <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical border-0" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false">
             </button>
 
             <ul class="dropdown-menu">

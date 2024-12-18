@@ -13,11 +13,12 @@ import { CommentReplyEditModel } from '../../../../core/models/comment-replies/c
 import { CommentVoteService } from '../../../../core/services/comment-vote.service';
 import { CommentEditModel } from '../../../../core/models/comments/comment-edit-model';
 import { CommentListModel } from '../../../../core/models/comments/comment-list-model';
+import { DateDisplayPipe } from '../../../../core/pipes/datedisplay.pipe';
 
 @Component({
   selector: 'app-comment',
   standalone: true,
-  imports: [NgClass, CommentRepliesComponent, FormsModule, RouterLink],
+  imports: [NgClass, CommentRepliesComponent, FormsModule, RouterLink, DateDisplayPipe],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css'
 })
@@ -37,7 +38,7 @@ export class CommentComponent {
 
   newCommentReply: CommentReplyCreateModel = {
     commentId: 0,
-    text: ''
+    text: '',
   }
 
   constructor(private readonly authService: AuthService,
@@ -63,6 +64,7 @@ export class CommentComponent {
     let addedCommentReply: CommentReplyListModel = {
       id: 0,
       text: this.newCommentReply.text,
+      createdOn: new Date().toString(),
       voteTally: 0,
       user: user!,
       userVote: {

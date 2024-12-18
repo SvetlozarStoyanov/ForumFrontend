@@ -4,10 +4,13 @@
             <a class="link-success" [routerLink]="['/subforums/', post?.subforum?.name]"
                 (click)="$event.stopPropagation()">
                 <h5 class="fst-italic text-start">
-                    {{ post?.subforum?.name}}
+                    s/{{ post?.subforum?.name}}
                 </h5>
             </a>
         </div>
+    </div>
+    <div>
+        <span>{{post?.createdOn! | datedisplay}} </span>
     </div>
     <div class="text-start text-break">
         <h4>{{ post?.title}}</h4>

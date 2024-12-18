@@ -49,6 +49,7 @@ export class CommentSectionComponent implements OnInit {
     let addedComment: CommentListModel = {
       id: 0,
       text: this.newComment.text,
+      createdOn: new Date().toString(),
       voteTally: 0,
       user: {
         id: currentUser!.id,
@@ -70,8 +71,8 @@ export class CommentSectionComponent implements OnInit {
     createCommentForm.reset();
   }
 
-  editComment(commentEditModel: CommentEditModel){
-    this.commentService.updateComment(commentEditModel).subscribe(res =>{
+  editComment(commentEditModel: CommentEditModel) {
+    this.commentService.updateComment(commentEditModel).subscribe(res => {
 
     });
   }

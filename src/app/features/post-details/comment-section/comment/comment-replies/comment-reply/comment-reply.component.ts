@@ -7,11 +7,12 @@ import { CommentReplyEditModel } from '../../../../../../core/models/comment-rep
 import { VoteType } from '../../../../../../core/enums/vote-types';
 import { CommentReplyVoteService } from '../../../../../../core/services/comment-reply-vote.service';
 import { RouterLink } from '@angular/router';
+import { DateDisplayPipe } from '../../../../../../core/pipes/datedisplay.pipe';
 
 @Component({
   selector: 'app-comment-reply',
   standalone: true,
-  imports: [NgClass, FormsModule, RouterLink],
+  imports: [NgClass, FormsModule, RouterLink, DateDisplayPipe],
   templateUrl: './comment-reply.component.html',
   styleUrl: './comment-reply.component.css'
 })
@@ -27,9 +28,9 @@ export class CommentReplyComponent {
     text: ''
   }
 
-constructor(private readonly commentReplyVoteService: CommentReplyVoteService){
+  constructor(private readonly commentReplyVoteService: CommentReplyVoteService) {
 
-}
+  }
 
   onDeleteEvent() {
     this.deleteEvent.emit(this.reply?.id);

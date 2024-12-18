@@ -1,11 +1,16 @@
 <div class="d-flex flex-column gap-3 p-3 border border-2 border-white border-opacity-25 rounded-5">
     <div class="d-flex flex-column gap-2 p-3 justify-content-evenly">
         <div class="d-flex flex-row justify-content-between">
-            <a class="link-info" [routerLink]="['/users/', comment?.user?.username]">
-                <h5 class="fst-italic text-start">
-                    u/{{ comment?.user?.username}}
-                </h5>
-            </a>
+            <div class="d-flex flex-column gap-3">
+                <a class="link-info" [routerLink]="['/users/', comment?.user?.username]">
+                    <h5 class="fst-italic text-start">
+                        u/{{ comment?.user?.username}}
+                    </h5>
+                </a>
+                <div>
+                    <span>{{ comment?.createdOn! | datedisplay}}</span>
+                </div>
+            </div>
             @if (comment?.userPermittedActions?.canEdit || comment?.userPermittedActions?.canDelete) {
             <div class="btn-group">
                 <button class="btn btn-lg rounded-circle bi bi-three-dots-vertical border-0" type="button"
@@ -44,7 +49,7 @@
         </form>
         } @else {
 
-        <p class="fs-5 text-wrap text-start">
+        <p class="fs-5 text-wrap text-start mt-3">
             {{ comment?.text}}
         </p>
         }
