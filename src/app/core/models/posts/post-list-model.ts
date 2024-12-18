@@ -9,6 +9,7 @@ export interface PostListModel {
     text: string,
     voteTally: number,
     commentCount: number,
+    createdOn: string,
     user: UserMinInfoModel,
     subforum: SubforumMinInfoModel,
     userPermittedActions: UserPermittedActionsModel,

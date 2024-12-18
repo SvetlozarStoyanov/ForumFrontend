@@ -6,7 +6,8 @@ import { UserVoteModel } from "../users/user-vote-model";
 export interface CommentListModel {
     id: number,
     text: string,
-    voteTally: number
+    createdOn: string,
+    voteTally: number,
     user: UserMinInfoModel,
     userPermittedActions: UserPermittedActionsModel,
     userVote: UserVoteModel,
