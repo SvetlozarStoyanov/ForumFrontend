@@ -3,6 +3,6 @@
         {{ user?.username}}
     </h5>
     <div class="text-start text-break">
-        <h4>{{ user?.postCount! | postcount}}</h4>
+        <h4>{{ user?.postCount! | generalCount:"post":"posts"}}</h4>
     </div>
 </div>

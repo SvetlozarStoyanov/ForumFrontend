@@ -4,7 +4,7 @@
     </h3>
     <div class="p-3">
         <h5>
-            {{ user?.postCount! | postcount}}
+            {{ user?.postCount! | generalCount:"post":"posts"}}
         </h5>
     </div>
     <app-post-list [posts]="posts" (loadMorePostsEvent)="loadMorePosts($event)"

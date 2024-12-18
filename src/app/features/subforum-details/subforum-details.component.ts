@@ -6,13 +6,13 @@ import { PostListModel } from '../../core/models/posts/post-list-model';
 import { PostListComponent } from '../../shared/post-list/post-list.component';
 import { PostService } from '../../core/services/post.service';
 import { PostsQueryModel } from '../../core/models/posts/posts-query-model';
-import { MemberCountPipe } from '../../core/pipes/membercount.pipe';
 import { PostOrder } from '../../core/enums/post-order';
+import { GeneralCountPipe } from '../../core/pipes/general-count.pipe';
 
 @Component({
   selector: 'app-subforum-details',
   standalone: true,
-  imports: [PostListComponent, MemberCountPipe],
+  imports: [PostListComponent, GeneralCountPipe],
   templateUrl: './subforum-details.component.html',
   styleUrl: './subforum-details.component.css'
 })

@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { UserSearchModel } from '../../../../core/models/users/user-search-model';
-import { PostCountPipe } from '../../../../core/pipes/postcount.pipe';
+import { GeneralCountPipe } from '../../../../core/pipes/general-count.pipe';
 
 @Component({
   selector: 'app-search-user',
   standalone: true,
-  imports: [PostCountPipe],
+  imports: [GeneralCountPipe],
   templateUrl: './search-user.component.html',
   styleUrl: './search-user.component.css'
 })

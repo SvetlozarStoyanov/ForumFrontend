@@ -6,13 +6,13 @@ import { PostListModel } from '../../core/models/posts/post-list-model';
 import { PostService } from '../../core/services/post.service';
 import { PostsQueryModel } from '../../core/models/posts/posts-query-model';
 import { PostOrder } from '../../core/enums/post-order';
-import { PostCountPipe } from '../../core/pipes/postcount.pipe';
 import { PostListComponent } from '../../shared/post-list/post-list.component';
+import { GeneralCountPipe } from '../../core/pipes/general-count.pipe';
 
 @Component({
   selector: 'app-user-details',
   standalone: true,
-  imports: [PostListComponent, PostCountPipe],
+  imports: [PostListComponent, GeneralCountPipe],
   templateUrl: './user-details.component.html',
   styleUrl: './user-details.component.css'
 })

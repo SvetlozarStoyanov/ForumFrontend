@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { SubforumListModel } from '../../core/models/subforums/subforum-list-model';
-import { MemberCountPipe } from '../../core/pipes/membercount.pipe';
 import { RouterLink } from '@angular/router';
+import { GeneralCountPipe } from '../../core/pipes/general-count.pipe';
 
 @Component({
   selector: 'app-subforum',
   standalone: true,
-  imports: [MemberCountPipe, RouterLink],
+  imports: [GeneralCountPipe, RouterLink],
   templateUrl: './subforum.component.html',
   styleUrl: './subforum.component.css'
 })
