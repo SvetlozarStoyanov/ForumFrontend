@@ -47,19 +47,18 @@
     @if (isEditing) {
     <form #editPostForm="ngForm" (ngSubmit)="editPostFormSubmit(editPostForm)">
         <div class="form-group d-flex flex-column gap-1">
-            <label for="text" class="form-label">Edit text</label>
-            <textarea name="text" class="form-control-lg flex-grow-2 bg-dark text-white" autofocus required
+            <textarea name="text" class="form-control-lg flex-grow-2 bg-black text-white" autofocus required
                 [(ngModel)]="postEditModel.text" #text="ngModel"></textarea>
                 @if (text.touched && text.errors?.['required']) {
                     <span class="text-danger fs-5">
                         Text is required!
                     </span>
                     }
-            <div class="btn-group align-self-end">
-                <button class="btn btn-lg btn-secondary p-3" type="button" (click)="onCancel($event)">
+            <div class="align-self-end d-flex flex-row gap-1">
+                <button class="btn btn-secondary p-3" type="button" (click)="onCancel($event)">
                     Cancel
                 </button>
-                <button class="btn btn-lg btn-success p-3" type="submit" [disabled]="editPostForm.invalid">
+                <button class="btn btn-success p-3" type="submit" [disabled]="editPostForm.invalid">
                     Save
                 </button>
             </div>

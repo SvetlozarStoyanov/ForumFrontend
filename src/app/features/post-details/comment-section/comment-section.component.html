@@ -6,7 +6,7 @@
             (ngSubmit)="createCommentSubmit(createCommentForm)">
             <div class="form-group d-flex flex-column">
                 <textarea name="text" #text="ngModel" [(ngModel)]="newComment.text"
-                    class="form-control-lg flex-grow-2 bg-dark text-white" placeholder="Comment..." autofocus rows="1"
+                    class="form-control-lg flex-grow-2 bg-black text-white" placeholder="Comment..." autofocus rows="1"
                     required></textarea>
                 @if (text.touched && text.errors?.['required']) {
                 <span class="text-danger fs-5">
@@ -14,11 +14,11 @@
                 </span>
                 }
             </div>
-            <div class="align-self-end d-flex flex-row gap-1">
-                <button class="btn btn-lg btn-secondary p-3" type="button" (click)="cancelCreateComment($event)">
+            <div class="align-self-end d-flex flex-row gap-2">
+                <button class="btn btn-secondary p-3" type="button" (click)="cancelCreateComment($event)">
                     Cancel
                 </button>
-                <button class="btn btn-lg btn-success p-3" type="submit" [disabled]="createCommentForm.invalid">
+                <button class="btn btn-success p-3" type="submit" [disabled]="createCommentForm.invalid">
                     Post
                 </button>
             </div>

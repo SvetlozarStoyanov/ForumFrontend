@@ -32,7 +32,7 @@
         @if (isEditing) {
         <form #editCommentReplyForm="ngForm" (ngSubmit)="editCommentReplyFormSubmit(editCommentReplyForm)" class="d-flex flex-column gap-1">
             <div class="form-group d-flex flex-column gap-1">
-                <textarea name="text" #text="ngModel" class="form-control-lg flex-grow-2 bg-dark text-white"
+                <textarea name="text" #text="ngModel" class="form-control-lg flex-grow-2 bg-black text-white"
                     [(ngModel)]="replyEditModel.text" required placeholder="Text..."></textarea>
                 @if (text.touched && text.errors?.['required']) {
                 <span class="text-danger fs-5">
@@ -41,10 +41,10 @@
                 }
             </div>
             <div class="align-self-end d-flex flex-row gap-1">
-                <button class="btn btn-lg btn-secondary p-3" type="button" (click)="onCancel($event)">
+                <button class="btn btn-secondary p-3" type="button" (click)="onCancel($event)">
                     Cancel
                 </button>
-                <button class="btn btn-lg btn-success p-3" type="submit" [disabled]="editCommentReplyForm.invalid">
+                <button class="btn btn-success p-3" type="submit" [disabled]="editCommentReplyForm.invalid">
                     Save
                 </button>
             </div>
