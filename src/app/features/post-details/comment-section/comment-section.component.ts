@@ -36,7 +36,6 @@ export class CommentSectionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.postId);
     this.commentService.getPostComments(this.postId).subscribe(
       res => {
         this.comments = res;
