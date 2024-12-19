@@ -11,13 +11,26 @@
     text-decoration: none;
 }
 
-.sidebar .nav-item {
-    background: black;
+.sidebar .nav-item:hover {
+    background: rgba(120, 120, 120, 0.4)
 }
 
-.sidebar .nav-item:hover {
-    background: rgba(128, 128, 128, 0.2);
+.home-icon{
+    color: chocolate;
 }
+
+.create-subforum-icon {
+    color: greenyellow;
+}
+
+.explore-subforums-icon {
+    color: rgba(113, 136, 231, 1);
+}
+
+.my-subforums-icon {
+    color: yellowgreen;
+}
+
 
 
 @media (max-width: 1600px) {

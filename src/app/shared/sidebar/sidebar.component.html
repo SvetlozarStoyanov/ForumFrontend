@@ -1,26 +1,41 @@
 <aside class="border-end border-1 border-info border-opacity-25 sidebar flex-column bg-black">
-  <h5 class="text-center mt-3">
+  <ul class="nav flex-column gap-3">
+    <li class="nav-item rounded-5 p-2">
+      <a class="nav-link active row row-cols-2" routerLink="/home">
+        <i class="bi bi-house-door col home-icon"></i>
+        <span class="col">Home</span>
+      </a>
+    </li>
+  </ul>
+  <hr class="text-info opacity-25">
+  <h5 class="text-center fst-italic">
     Subforums
   </h5>
   <hr class="text-info opacity-25">
   <ul class="nav flex-column gap-3 mb-auto">
     @if (isLoggedIn) {
+      <li class="nav-item rounded-5 p-2">
+        <a routerLink="/subforums/create" class="nav-link active row row-cols-2">
+          <i class="bi bi-plus-lg col fs-6 create-subforum-icon"></i>
+          <span class="col">Create</span>
+        </a>
+      </li>
     <li class="nav-item rounded-5 p-2">
       <a routerLink="/subforums/unjoined" class="nav-link active row row-cols-2">
-        <i class="bi bi-globe col"></i>
+        <i class="bi bi-globe col explore-subforums-icon"></i>
         <span class="col">Explore</span>
       </a>
     </li>
     <li class="nav-item rounded-5 p-2">
       <a routerLink="/subforums/joined" class="nav-link active row row-cols-2">
-        <i class="bi bi-window-stack col"></i>
+        <i class="bi bi-window-stack col my-subforums-icon"></i>
         <span class="col">Joined</span>
       </a>
     </li>
     } @else {
     <li class="nav-item rounded-5 p-2">
       <a routerLink="/subforums/guest" class="nav-link active row row-cols-2">
-        <i class="bi bi-globe col"></i>
+        <i class="bi bi-globe col explore-subforums-icon"></i>
         <span class="col">Explore</span>
       </a>
     </li>

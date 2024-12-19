@@ -2,7 +2,7 @@
     cursor: pointer;
 }
 
-.search-input-form{
+.search-input-form {
     border: 1px solid gray;
     text-indent: 1rem;
 }
@@ -19,18 +19,42 @@
     border: 1px solid orangered;
 }
 
+.nav-item:hover {
+    background: rgba(120, 120, 120, 0.4)
+}
+
 .search-input-form::placeholder {
     color: gainsboro;
 }
 
 @media (max-width: 1599px) {
-    .subforum-links .nav-item {
-        display: flex;
+    .small-screen-link {
+        display: block;
     }
 }
 
 @media (min-width: 1600px) {
-    .subforum-links .nav-item {
+    .small-screen-link {
         display: none;
     }
+}
+
+.home-icon {
+    color: chocolate;
+}
+
+.create-icon {
+    color: greenyellow;
+}
+
+.explore-subforums-icon {
+    color: rgba(113, 136, 231, 1);
+}
+
+.my-subforums-icon {
+    color: yellowgreen;
+}
+
+.profile-menu-icon {
+    font-size: 20px
 }

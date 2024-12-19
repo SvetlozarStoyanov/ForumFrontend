@@ -1,16 +1,35 @@
-@if (isLoggedIn$ | async) {
-<form #createCommentForm="ngForm" class="d-flex flex-column gap-2 my-3"
-    (ngSubmit)="createCommentSubmit(createCommentForm)">
-    <label for="text" class="form-label fs-5">Share your thoughts</label>
-    <textarea name="text" [(ngModel)]="newComment.text" class="form-control-lg flex-grow-2 bg-dark text-white"
-        placeholder="Comment..." rows="1"></textarea>
-    <button class="align-self-end flex-grow 1 btn btn-lg btn-success p-3" type="submit">Post</button>
-</form>
-}
-<article>
+<article class="d-flex flex-column gap-2">
+    <div class="d-flex flex-row w-100 px-2">
+
+        @if (isCreatingComment) {
+        <form #createCommentForm="ngForm" class="d-flex flex-column w-100 gap-2 my-3"
+            (ngSubmit)="createCommentSubmit(createCommentForm)">
+            <div class="form-group d-flex flex-column">
+                <textarea name="text" #text="ngModel" [(ngModel)]="newComment.text"
+                    class="form-control-lg flex-grow-2 bg-dark text-white" placeholder="Comment..." autofocus rows="1"
+                    required></textarea>
+                @if (text.touched && text.errors?.['required']) {
+                <span class="text-danger fs-5">
+                    Text is required!
+                </span>
+                }
+            </div>
+            <div class="align-self-end d-flex flex-row gap-1">
+                <button class="btn btn-lg btn-secondary p-3" type="button" (click)="cancelCreateComment($event)">
+                    Cancel
+                </button>
+                <button class="btn btn-lg btn-success p-3" type="submit" [disabled]="createCommentForm.invalid">
+                    Post
+                </button>
+            </div>
+        </form>
+        } @else {
+        <button
+            class="create-comment-toggle-btn form-control-lg text-start btn bg-black w-100 rounded-5 border border-1 border-opacity-50 border-white"
+            (click)="createCommentToggle($event)"><span>Comment...</span></button>
+        }
+    </div>
     @for (comment of comments; track $index) {
-    <app-comment [comment]="comment"
-     (editEvent)="editComment($event)"
-      (deleteEvent)="deleteComment($event)"/>
+    <app-comment [comment]="comment" (editEvent)="editComment($event)" (deleteEvent)="deleteComment($event)" />
     }
 </article>

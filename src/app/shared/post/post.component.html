@@ -9,17 +9,16 @@
                 </h5>
             </a>
             }
+            @if (post?.user) {
             <a class="link-info" [routerLink]="['/users/', post?.user?.username]" (click)="$event.stopPropagation()">
                 <h5 class="fst-italic text-start">
                     u/{{ post?.user?.username}}
                 </h5>
             </a>
-
-
+            }
             <div>
                 <h6>{{post?.createdOn! | datedisplay}}</h6>
             </div>
-
         </div>
         @if (post?.userPermittedActions?.canEdit || post?.userPermittedActions?.canDelete) {
         <div class="btn-group justify-self-end align-self-start dropstart">
@@ -49,13 +48,18 @@
     <form #editPostForm="ngForm" (ngSubmit)="editPostFormSubmit(editPostForm)">
         <div class="form-group d-flex flex-column gap-1">
             <label for="text" class="form-label">Edit text</label>
-            <textarea name="text" class="form-control-lg flex-grow-2 bg-dark text-white"
-                [(ngModel)]="postEditModel.text"></textarea>
+            <textarea name="text" class="form-control-lg flex-grow-2 bg-dark text-white" autofocus required
+                [(ngModel)]="postEditModel.text" #text="ngModel"></textarea>
+                @if (text.touched && text.errors?.['required']) {
+                    <span class="text-danger fs-5">
+                        Text is required!
+                    </span>
+                    }
             <div class="btn-group align-self-end">
                 <button class="btn btn-lg btn-secondary p-3" type="button" (click)="onCancel($event)">
                     Cancel
                 </button>
-                <button class="btn btn-lg btn-success p-3" type="submit">
+                <button class="btn btn-lg btn-success p-3" type="submit" [disabled]="editPostForm.invalid">
                     Save
                 </button>
             </div>
@@ -67,15 +71,15 @@
     </p>
     }
     <div class="d-flex flex-row align-items-center align-content-center">
-        <button class="btn bg-dark rounded-circle bi bi-arrow-up fs-4"
+        <button class="btn bg-dark rounded-circle"
             [ngClass]="[post?.userVote?.voteType === voteType.Up ? 'upvoted-btn' : 'upvote-btn']"
-            (click)="upvoteClick()">
-            <!-- <i class="bi bi-arrow-up fs-4"></i> -->
+            (click)="upvoteClick($event)">
+            <i class="bi bi-arrow-up fs-4"></i>
         </button>
-        <button class="btn bg-dark rounded-circle bi bi-arrow-down fs-4"
+        <button class="btn bg-dark rounded-circle"
             [ngClass]="[post?.userVote?.voteType === voteType.Down ? 'downvoted-btn' : 'downvote-btn']"
-            (click)="downvoteClick()">
-            <!-- <i class="bi bi-arrow-down fs-4"></i> -->
+            (click)="downvoteClick($event)">
+            <i class="bi bi-arrow-down fs-4"></i>
         </button>
         <span class="text-center fs-4 px-2" [ngClass]="[post?.voteTally! > 0 ? 'upvoted-tally' 
              : post?.voteTally! < 0 ? 'downvoted-tally' 

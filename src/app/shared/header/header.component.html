@@ -1,5 +1,5 @@
 <header class="sticky-lg-top bg-black border-bottom border-1 border-opacity-50 border-info">
-  <nav class="navbar navbar-expand-lg" data-bs-theme="dark">
+  <nav class="navbar navbar-expand-xxl" data-bs-theme="dark">
     <div class="container-fluid d-flex flex-row">
       <a class="navbar-brand fs-3 order-1" routerLink="/home">Forum</a>
       <button class="navbar-toggler justify-self-end order-4" type="button" data-bs-toggle="collapse"
@@ -8,8 +8,31 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse order-4" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 subforum-links justify-self-start">
-          <div class="order-3">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0 justify-self-start">
+          <li class="nav-item rounded-5 p-2 small-screen-link ">
+            <a routerLink="/home" class="nav-link active">
+              <i class="bi bi-house-door home-icon"></i> Home
+            </a>
+          </li>
+          @if (isLoggedIn) {
+          <li class="nav-item rounded-5 p-2 small-screen-link">
+            <a routerLink="/subforums/unjoined" class="nav-link active">
+              <i class="bi bi-globe explore-subforums-icon"></i> Explore subforums
+            </a>
+          </li>
+          <li class="nav-item rounded-5 p-2 small-screen-link">
+            <a routerLink="/subforums/joined" class="nav-link active">
+              <i class="bi bi-window-stack my-subforums-icon"></i> My subforums
+            </a>
+          </li>
+          } @else {
+          <li class="nav-item rounded-5 p-2 small-screen-link">
+            <a routerLink="/subforums/guest" class="nav-link active">
+              <i class="bi bi-globe explore-subforums-icon"></i> Explore subforums
+            </a>
+          </li>
+          }
+          <li class="p-2">
             <form #navbarSearchForm="ngForm" class="d-flex flex-row align-items-center"
               (ngSubmit)="searchSubmit(navbarSearchForm)">
               <div class="form-group">
@@ -20,49 +43,49 @@
                 <i class="bi bi-search"></i>
               </button>
             </form>
-          </div>
-          @if (isLoggedIn) {
-          <li class="nav-item rounded-5">
-            <a routerLink="/subforums/unjoined" class="nav-link active">
-              <i class="bi bi-globe"></i> Explore
-            </a>
           </li>
-          <li class="nav-item rounded-5">
-            <a routerLink="/subforums/joined" class="nav-link active">
-              <i class="bi bi-window-stack"></i> My subforums
-            </a>
-          </li>
-          } @else {
-          <li class="nav-item rounded-5">
-            <a routerLink="/subforums/guest" class="nav-link active">
-              <i class="bi bi-globe"></i> Explore
-            </a>
-          </li>
-          }
         </ul>
         <ul class="navbar-nav">
           @if (!isLoggedIn) {
-          <li class="nav-item">
+          <li class="nav-item rounded-5 p-2">
             <a class="nav-link active" routerLink="/register">Register</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item rounded-5 p-2">
             <a class="nav-link active" routerLink="/login">Login</a>
           </li>
           } @else {
-          <li class="nav-item">
+          <li class="nav-item rounded-5 p-2">
             <a class="nav-link active" routerLink="/posts/create">
-              <i class="bi bi-plus-circle"></i> Create Post
+              <i class="bi bi-plus-lg create-icon"></i> Create Post
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item small-screen-link rounded-5 p-2">
             <a class="nav-link active" routerLink="/subforums/create">
-              <i class="bi bi-journal-plus"></i> Create Subforum
+              <i class="bi bi-plus-lg create-icon"></i> Create Subforum
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link active" (click)="myProfileRedirect()">My profile</a>
+          <li class="dropdown d-xxl-block d-none rounded-5 p-2 nav-item">
+            <button class="btn  border-0" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              <i class="bi bi-person-circle profile-menu-icon"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li class="nav-item rounded-5 p-2">
+                <a class="nav-link active" (click)="myProfileRedirect()">
+                  My profile
+                </a>
+              </li>
+              <li class="nav-item rounded-5 p-2">
+                <a class="nav-link active" (click)="logout()">Logout</a>
+              </li>
+            </ul>
           </li>
-          <li class="nav-item">
+          <li class="d-xxl-none d-block nav-item rounded-5 p-2">
+            <a class="nav-link active" (click)="myProfileRedirect()">
+              My profile
+            </a>
+          </li>
+          <li class="d-xxl-none d-block nav-item rounded-5 p-2">
             <a class="nav-link active" (click)="logout()">Logout</a>
           </li>
           }

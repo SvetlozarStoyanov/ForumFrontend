@@ -44,7 +44,7 @@ export class PostComponent {
   }
 
   onEditEvent($event: MouseEvent) {
-    $event.stopPropagation();
+    // $event.stopPropagation();
     let currentRoute: string = this.router.url;
     if (!currentRoute.startsWith("/posts/details")) {
       this.router.navigateByUrl(`/posts/details/${this.post?.id}`, { state: { isEditingMode: true, text: this.post?.text } })
@@ -59,7 +59,8 @@ export class PostComponent {
     this.isEditing = false;
   }
 
-  upvoteClick() {
+  upvoteClick($event: MouseEvent) {
+    $event.stopPropagation();
     this.postVoteService.upvotePost(this.post?.id!).subscribe(res => {
       let voteType = this.post!.userVote.voteType;
       if (voteType === VoteType.None) {
@@ -75,7 +76,8 @@ export class PostComponent {
     })
   }
 
-  downvoteClick() {
+  downvoteClick($event: MouseEvent) {
+    $event.stopPropagation();
     this.postVoteService.downvotePost(this.post?.id!).subscribe(res => {
       let voteType = this.post?.userVote.voteType;
       if (voteType === VoteType.None) {

@@ -8,3 +8,13 @@ textarea {
     color: white!important;
     opacity: 1;
 }
+
+.create-comment-toggle-btn{
+    user-select: none;
+}
+
+.create-comment-toggle-btn>span{
+    padding-left: 20px;
+    text-align: start;
+    color: gray;
+}

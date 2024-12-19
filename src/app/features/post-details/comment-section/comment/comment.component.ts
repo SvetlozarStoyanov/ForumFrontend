@@ -23,7 +23,6 @@ import { DateDisplayPipe } from '../../../../core/pipes/datedisplay.pipe';
   styleUrl: './comment.component.css'
 })
 export class CommentComponent {
-  @ViewChild('createReplyDiv') toggleReplyBtn!: ElementRef;
   @Input() comment?: CommentListModel;
   @Output() editEvent = new EventEmitter<CommentEditModel>();
   @Output() deleteEvent = new EventEmitter<number>();

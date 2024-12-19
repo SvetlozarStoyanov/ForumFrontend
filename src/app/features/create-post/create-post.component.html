@@ -13,11 +13,21 @@
         </div>
         <div class="form-group d-flex flex-column gap-2">
             <input name="title" class="title-input p-2 fs-5 bg-dark text-white rounded-5" required placeholder="Title"
-                [(ngModel)]="postCreateModel.title" />
+                [(ngModel)]="postCreateModel.title" #title="ngModel" />
+            @if (title.touched && title.errors?.['required']) {
+            <span class="text-danger fs-5">
+                Title is required!
+            </span>
+            }
         </div>
         <div class="form-group d-flex flex-column gap-2">
             <textarea name="text" class="p-2 bg-dark text-white rounded-5" required placeholder="Text"
-                [(ngModel)]="postCreateModel.text"></textarea>
+                [(ngModel)]="postCreateModel.text" #text="ngModel"></textarea>
+            @if (text.touched && text.errors?.['required']) {
+            <span class="text-danger fs-5">
+                Text is required!
+            </span>
+            }
         </div>
         <div class="d-flex flex-row gap-3 align-self-end">
             <button class="btn btn-lg btn-success" type="submit" [disabled]="createPostForm.invalid">
