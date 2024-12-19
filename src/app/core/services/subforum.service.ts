@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { environment } from '../../../environment/environment';
 import { SubforumCreateModel } from '../models/subforums/subforum-create-model';
 import { SubforumDetailsModel } from '../models/subforums/subforum-details-model';
@@ -8,13 +8,14 @@ import { SubforumDropdownModel } from '../models/subforums/subforum-dropdown-mod
 import { SubforumsQueryModel } from '../models/subforums/subforums-query-model';
 import { SubforumListModel } from '../models/subforums/subforum-list-model';
 import { SubforumSearchModel } from '../models/subforums/subforum-search-model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubforumService {
 
-  constructor(private readonly httpClient: HttpClient) {
+  constructor(private readonly httpClient: HttpClient, private readonly router: Router) {
 
   }
 
@@ -51,7 +52,13 @@ export class SubforumService {
   }
 
   joinSubforum(subforumId: number) {
-    return this.httpClient.post(`${environment.apiUrl}/subforums/join/${subforumId}`, {});
+    return this.httpClient.post(`${environment.apiUrl}/subforums/join/${subforumId}`, {})
+      .pipe(catchError(error => {
+        if (error.status === 401) {
+          this.router.navigate(['/login']);
+        }
+        return of(null)
+      }));;
   }
 
   leaveSubforum(subforumId: number) {
