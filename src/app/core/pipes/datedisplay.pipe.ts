@@ -33,7 +33,6 @@ export class DateDisplayPipe implements PipeTransform {
           } else {
             result = `${diffInHours} hours ago`;
           }
-          result = `${diffInHours} hours ago`;
         } else {
           const diffInDays = Math.floor(diffInHours / 24);
           if (diffInDays < 30) {
