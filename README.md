@@ -1,4 +1,5 @@
-ForumFE - The Frontend portion of the Forum project Built with Angular 18.
-- A forum where users can create subforums, posts and comments.
-- Needs ForumApi to work - https://github.com/SvetlozarStoyanov/ForumApi. 
-!! Do not forget to access the seed endpoint of the backend to seed the data. !!
+ForumFrontend - The Frontend portion of the Forum project Built with Angular 18.
+Needs ForumApi to work - https://github.com/SvetlozarStoyanov/ForumApi.
+
+Web Application where users discuss topics. Divided into user created subforums, each with a different theme.
+Each post has a comment section including comments and comment replies. All posts and comments can be upvoted or downvoted
